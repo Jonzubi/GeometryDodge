@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {    
+    [HideInInspector]
     public float boundX, boundY;
     SpawnManager m_SpawnManager;
     int round = 1;
