@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float playerMovement = 1f;
+    public float m_playerMovement = 1f;
+    public float m_rotateSpeed = 0.1f;
     GameManager m_GameManager;
     SpawnManager m_SpawnManager;
     Vector3 targetPosition;
@@ -36,6 +37,9 @@ public class PlayerController : MonoBehaviour
         if (moveVector.magnitude < 0.1f)
             transform.position = targetPosition;
         else
-            transform.Translate(moveVector.normalized * playerMovement * Time.deltaTime);    
+            transform.Translate(moveVector.normalized * m_playerMovement * Time.deltaTime, Space.World);
+        
+        float angle = Mathf.Atan2(moveVector.x, moveVector.y) * Mathf.Rad2Deg;
+        LeanTween.rotateZ(gameObject, -angle, m_rotateSpeed);
     }
 }
