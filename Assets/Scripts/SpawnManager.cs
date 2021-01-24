@@ -35,7 +35,6 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < round; i++)
         {
             InstantiateEnemy();
-            Invoke("InstantiateGota", GetRandomTime(3f, 7f));
         }
     }
 }

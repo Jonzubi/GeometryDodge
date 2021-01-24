@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     GameManager m_GameManager;
     SpawnManager m_SpawnManager;
     Vector3 targetPosition;
-    int gotas = 0;
 
     void Awake()
     {
