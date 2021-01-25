@@ -25,16 +25,16 @@ public class EnemyController : MonoBehaviour
     {
         Vector2 actualPosition = transform.position;
 
-        if (actualPosition.x <= -m_gameManager.boundX + m_circleCollider.radius)
+        if (actualPosition.x <= m_gameManager.leftBoundX + m_circleCollider.radius)
             m_moveDirection = new Vector2(Mathf.Abs(m_moveDirection.x), m_moveDirection.y);
         
-        if (actualPosition.x  + m_circleCollider.radius >= m_gameManager.boundX)
+        if (actualPosition.x  + m_circleCollider.radius >= m_gameManager.rightBoundX)
             m_moveDirection = new Vector2(-Mathf.Abs(m_moveDirection.x), m_moveDirection.y);
         
-        if (actualPosition.y <= -m_gameManager.boundY + m_circleCollider.radius)
+        if (actualPosition.y <= m_gameManager.bottomBoundY + m_circleCollider.radius)
             m_moveDirection = new Vector2(m_moveDirection.x, Mathf.Abs(m_moveDirection.y));
 
-        if (actualPosition.y  + m_circleCollider.radius >= m_gameManager.boundY)
+        if (actualPosition.y  + m_circleCollider.radius >= m_gameManager.topBoundY)
             m_moveDirection = new Vector2(m_moveDirection.x, -Mathf.Abs(m_moveDirection.y));
 
         transform.Translate(m_moveDirection * m_moveSpeed * Time.deltaTime);

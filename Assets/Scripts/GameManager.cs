@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {    
     [HideInInspector]
-    public float boundX, boundY;
+    public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
     SpawnManager m_SpawnManager;
     int round = 1;
     int enemiesLeft;
@@ -14,8 +14,12 @@ public class GameManager : MonoBehaviour
     {
         m_SpawnManager = FindObjectOfType<SpawnManager>();
 
-        boundY = Camera.main.orthographicSize;    
-        boundX = boundY * Screen.width / Screen.height;
+        float auxBoundY = Camera.main.orthographicSize;    
+        float auxBoundX = auxBoundY * Screen.width / Screen.height;
+        leftBoundX = -auxBoundX;
+        rightBoundX = auxBoundX;
+        topBoundY = auxBoundY;
+        bottomBoundY = -auxBoundY + auxBoundY * 0.4f;
     }
 
     void Start()

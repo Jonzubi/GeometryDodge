@@ -20,8 +20,8 @@ public class SpawnManager : MonoBehaviour
     Vector3 GetRandomPos ()
     {
         float randomX, randomY;
-        randomX = Random.Range(-m_GameManager.boundX, m_GameManager.boundX);
-        randomY = Random.Range(-m_GameManager.boundY, m_GameManager.boundY);
+        randomX = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
+        randomY = Random.Range(m_GameManager.bottomBoundY, m_GameManager.topBoundY);
         return new Vector3(randomX, randomY, -1);
     }
 
