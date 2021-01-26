@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float m_moveSpeed = 3f;
+    public float m_spawnTime = 0.5f;
 
     GameManager m_gameManager;
     Vector2 m_moveDirection;
@@ -14,11 +15,26 @@ public class EnemyController : MonoBehaviour
     {
         m_gameManager = FindObjectOfType<GameManager>();
         m_circleCollider = GetComponent<CircleCollider2D>();
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
     void Start()
     {
+        StartCoroutine(Spawning());
+    }
+
+    IEnumerator Spawning()
+    {
+        LeanTween.scale(gameObject, new Vector3(1, 1, 1), m_spawnTime);
+        yield return new WaitForSeconds(m_spawnTime);
         m_moveDirection = Random.insideUnitCircle.normalized;
+    }
+
+    public IEnumerator Destroying()
+    {
+        LeanTween.scale(gameObject, new Vector3(0, 0, 0), m_spawnTime);
+        yield return new WaitForSeconds(m_spawnTime);
+        Destroy(gameObject);
     }
 
     void Update()
