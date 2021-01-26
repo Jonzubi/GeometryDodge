@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
     public int timeLeftSecsPerEnemy = 10;
+    public int destroyCoinsInSecond = 3;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
     int round = 1;
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviour
         for (int i = time; i > 0; i--)
         {
             m_canvasManager.SetSecondsInfoText($"{i}");
+            if (i == destroyCoinsInSecond)
+                m_spawnManager.DestroyCoins(destroyCoinsInSecond);                
+            
             yield return new WaitForSeconds(1);
         }
         StartCoroutine(RoundTimeLeftCounter());

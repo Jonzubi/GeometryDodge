@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CoinController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public IEnumerator StartDisappearing(int timeLeft)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Color auxColor = GetComponent<SpriteRenderer>().color;
+        for (; timeLeft > 0; timeLeft--)
+        {            
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 0f);
+            yield return new WaitForSeconds(0.25f);
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 1f);
+            yield return new WaitForSeconds(0.25f);
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 0f);
+            yield return new WaitForSeconds(0.25f);
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 1f);
+            yield return new WaitForSeconds(0.25f);
+        }
+        Destroy(gameObject);
     }
 }

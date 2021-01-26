@@ -63,4 +63,13 @@ public class SpawnManager : MonoBehaviour
             LeanTween.move(coin, randomEndPos, randomTime).setEaseInOutBack();
         }
     }
+
+    public void DestroyCoins(int timeLeft)
+    {
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+        foreach (GameObject coin in coins)
+        {
+            StartCoroutine(coin.GetComponent<CoinController>().StartDisappearing(timeLeft));
+        }
+    }
 }

@@ -53,4 +53,12 @@ public class PlayerController : MonoBehaviour
             LeanTween.rotateZ(gameObject, -angle, m_rotateSpeed);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
