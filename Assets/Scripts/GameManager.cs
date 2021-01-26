@@ -6,10 +6,12 @@ public class GameManager : MonoBehaviour
 {    
     [HideInInspector]
     public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
+    public int timeLeftSecsPerEnemy = 10;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
     int round = 1;
     int enemiesLeft;
+
 
     void Awake()
     {
@@ -52,8 +54,23 @@ public class GameManager : MonoBehaviour
             m_canvasManager.SetSecondsInfoText($"{i}");
             yield return new WaitForSeconds(1);
         }
+        StartCoroutine(RoundTimeLeftCounter());
         m_canvasManager.SetSecondsInfoText("");
         m_spawnManager.spawnEnemies(round);
         enemiesLeft = round;
+    }
+
+    IEnumerator RoundTimeLeftCounter()
+    {
+        float startTimeLeft = round * timeLeftSecsPerEnemy;
+        while (startTimeLeft > 0)
+        {
+            m_canvasManager.SetTimeLeftInfoText($"Survive: {startTimeLeft} s");
+            startTimeLeft--;
+            yield return new WaitForSeconds(1);
+        }
+
+        m_canvasManager.SetTimeLeftInfoText($"GG");
+        Time.timeScale = 0;
     }
 }
