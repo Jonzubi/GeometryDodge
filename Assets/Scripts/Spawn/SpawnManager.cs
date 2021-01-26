@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle;
+    public GameObject m_circle, m_coin;
     GameManager m_GameManager;
     void Awake()
     {
@@ -44,6 +44,23 @@ public class SpawnManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
+        }
+    }
+
+    public void SpawnCoins(int round)
+    {
+        float coinSpawnHigh = 10;
+        float maxFallCoinTime = 6f;
+        int coinsPerRound = 20;
+
+        for (int i = 0; i < round * coinsPerRound; i++)
+        {
+            float randomX = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
+            float randomTime = Random.Range(1, maxFallCoinTime);
+            Vector2 randomEndPos = GetRandomPos();
+            GameObject coin = Instantiate(m_coin, new Vector2(randomX, coinSpawnHigh), m_coin.transform.rotation);
+
+            LeanTween.move(coin, randomEndPos, randomTime).setEaseInOutBack();
         }
     }
 }

@@ -496,6 +496,7 @@ MonoBehaviour:
   rightBoundX: 0
   topBoundY: 0
   bottomBoundY: 0
+  timeLeftSecsPerEnemy: 10
 --- !u!1 &1001275575
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_circle: {fileID: 2903560285267550345, guid: 25268e0e6b7f0a043a2df94aa3967803,
     type: 3}
+  m_coin: {fileID: 8609886439500655410, guid: 769ea68d4a6b36d4d8ec556bfcb97fcc, type: 3}
 --- !u!1 &1005449918
 GameObject:
   m_ObjectHideFlags: 0

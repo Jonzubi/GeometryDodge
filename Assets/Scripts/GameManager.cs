@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
 
         m_spawnManager.DestroyAllEnemies();
+        m_spawnManager.SpawnCoins(round);
         m_canvasManager.SetTimeLeftInfoText($"LOOT!");
         round++;
         StartRound(15);
