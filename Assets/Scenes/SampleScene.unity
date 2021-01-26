@@ -497,6 +497,7 @@ MonoBehaviour:
   topBoundY: 0
   bottomBoundY: 0
   timeLeftSecsPerEnemy: 10
+  destroyCoinsInSecond: 3
 --- !u!1 &1001275575
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,6 +967,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pointer
       objectReference: {fileID: 0}
+    - target: {fileID: 6286887121061600373, guid: 18f5b7e22bb40ae48b7bff9c0c0095a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286887121061600374, guid: 18f5b7e22bb40ae48b7bff9c0c0095a3,
         type: 3}
       propertyPath: m_Color.a
@@ -1039,6 +1045,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8945002339618325218, guid: 59005e0449968d3499bf72208720d6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8945002339618325221, guid: 59005e0449968d3499bf72208720d6c9,
         type: 3}

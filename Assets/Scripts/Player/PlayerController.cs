@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            m_PointerManager.HidePointer();
             Destroy(gameObject);
             m_GameManager.GameOver();
         }   
