@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartRound();
+        StartRound(3);
     }
 
     public void EnemyDead ()
@@ -41,15 +41,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StartRound()
+    void StartRound(int time)
     {
         m_canvasManager.SetRoundInfoText($"Round {round}");
-        StartCoroutine(CountDownAndStart());
+        StartCoroutine(CountDownAndStart(time));
     }
 
-    IEnumerator CountDownAndStart()
+    IEnumerator CountDownAndStart(int time)
     {
-        for (int i = 3; i > 0; i--)
+        for (int i = time; i > 0; i--)
         {
             m_canvasManager.SetSecondsInfoText($"{i}");
             yield return new WaitForSeconds(1);
@@ -68,8 +68,9 @@ public class GameManager : MonoBehaviour
             m_canvasManager.SetTimeLeftInfoText($"Survive: {startTimeLeft} s");
             yield return new WaitForSeconds(1);
         }
-        
-        m_canvasManager.SetTimeLeftInfoText($"GG");
-        Time.timeScale = 0;
+
+        m_canvasManager.SetTimeLeftInfoText($"LOOT!");
+        round++;
+        StartRound(15);
     }
 }
