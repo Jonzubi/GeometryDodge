@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
 
+        m_spawnManager.DestroyAllEnemies();
         m_canvasManager.SetTimeLeftInfoText($"LOOT!");
         round++;
         StartRound(15);

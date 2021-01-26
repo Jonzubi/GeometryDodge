@@ -37,4 +37,13 @@ public class SpawnManager : MonoBehaviour
             InstantiateEnemy();
         }
     }
+
+    public void DestroyAllEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }
 }
