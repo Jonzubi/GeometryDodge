@@ -79,4 +79,11 @@ public class GameManager : MonoBehaviour
         round++;
         StartRound(15);
     }
+
+    public void GameOver()
+    {
+        StopAllCoroutines();
+        m_spawnManager.DestroyAllEnemies();
+        m_canvasManager.SetGameOverTexts();
+    }
 }

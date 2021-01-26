@@ -28,4 +28,11 @@ public class CanvasManager : MonoBehaviour
     {
         m_timeLeftInfo.GetComponent<Text>().text = text;
     }
+
+    public void SetGameOverTexts()
+    {
+        SetRoundInfoText("Game Over");
+        SetSecondsInfoText("");
+        SetTimeLeftInfoText("");
+    }
 }
