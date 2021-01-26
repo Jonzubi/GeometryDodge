@@ -63,13 +63,12 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundTimeLeftCounter()
     {
         float startTimeLeft = round * timeLeftSecsPerEnemy;
-        while (startTimeLeft > 0)
+        for (;startTimeLeft > 0; startTimeLeft--)
         {
             m_canvasManager.SetTimeLeftInfoText($"Survive: {startTimeLeft} s");
-            startTimeLeft--;
             yield return new WaitForSeconds(1);
         }
-
+        
         m_canvasManager.SetTimeLeftInfoText($"GG");
         Time.timeScale = 0;
     }
