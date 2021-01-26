@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
         return Random.Range(min, max);
     }
 
-    public void spawnEnemies (int round)
+    public void SpawnEnemies (int round)
     {
         for (int i = 0; i < round; i++)
         {
