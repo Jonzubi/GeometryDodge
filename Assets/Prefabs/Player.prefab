@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c99fc9e9ac3028499caaa8690bfa7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerMovement: 10
+  m_playerMovement: 5
   m_rotateSpeed: 0
 --- !u!60 &8945002339618325222
 PolygonCollider2D:

@@ -21,4 +21,11 @@ public class GameDataCollector : MonoBehaviour
     {
         m_timeSurvived += time;
     }
+
+    public static void ResetData()
+    {
+        m_enemyKilled = 0;
+        m_coinsReceived = 0;
+        m_timeSurvived = 0;
+    }
 }

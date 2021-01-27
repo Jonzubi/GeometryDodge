@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin;
+    public GameObject m_circle, m_coin, m_player, m_pointer;
     GameManager m_GameManager;
     void Awake()
     {
         m_GameManager = FindObjectOfType<GameManager>();
     }
 
-    void InstantiateEnemy()
+    public void InstantiatePlayer()
     {
         Vector3 randomPos = GetRandomPos();
+        Instantiate(m_pointer, randomPos, m_player.transform.rotation);
+        Instantiate(m_player, randomPos, m_player.transform.rotation);
+    }
+
+    void InstantiateEnemy()
+    {
         Instantiate(m_circle, GetRandomPos(), m_circle.transform.rotation);
     }
 

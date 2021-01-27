@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {    
@@ -10,7 +11,6 @@ public class GameManager : MonoBehaviour
     public int destroyCoinsInSecond = 3;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
-    GameDataCollector m_gameDataCollector;
     int round = 1;
     int enemiesLeft;
 
@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     {
         m_spawnManager = FindObjectOfType<SpawnManager>();
         m_canvasManager = FindObjectOfType<CanvasManager>();
-        m_gameDataCollector = new GameDataCollector();
 
         float auxBoundY = Camera.main.orthographicSize;    
         float auxBoundX = auxBoundY * Screen.width / Screen.height;
@@ -31,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        GameDataCollector.ResetData();
+        m_spawnManager.InstantiatePlayer();
         StartRound(3);
     }
 
@@ -88,5 +89,16 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         m_spawnManager.DestroyAllEnemies(false);
         m_canvasManager.SetGameOverTexts();
+    }
+
+    public void RestartGame()
+    {
+        m_canvasManager.HideGameDataPanel();
+        Start();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
