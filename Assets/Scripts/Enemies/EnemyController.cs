@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     public float m_moveSpeed = 3f;
     public float m_spawnTime = 0.5f;
+    public float m_inoffensiveTime = 1f;
+    public float m_blinkTime = 0.125f;
 
     GameManager m_gameManager;
     Vector2 m_moveDirection;
@@ -28,6 +30,21 @@ public class EnemyController : MonoBehaviour
         LeanTween.scale(gameObject, new Vector3(1, 1, 1), m_spawnTime);
         yield return new WaitForSeconds(m_spawnTime);
         m_moveDirection = Random.insideUnitCircle.normalized;
+
+        // Tiempo inofensivo
+        Color auxColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<CircleCollider2D>().enabled = false;
+
+        float startBlinking = 0;
+        while(startBlinking <= m_inoffensiveTime)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 0f);
+            yield return new WaitForSeconds(m_blinkTime);
+            GetComponent<SpriteRenderer>().color = new Color(auxColor.r, auxColor.g, auxColor.b, 1f);
+            yield return new WaitForSeconds(m_blinkTime);
+            startBlinking += m_blinkTime * 2;
+        }
+        GetComponent<CircleCollider2D>().enabled = true;
     }
 
     public IEnumerator Destroying()
