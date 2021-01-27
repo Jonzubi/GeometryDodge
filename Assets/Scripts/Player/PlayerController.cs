@@ -23,9 +23,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            Vector3 auxVector = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Touch touch = Input.GetTouch(0);
+            Vector3 auxVector = Camera.main.ScreenToWorldPoint(touch.position);
 
             if (auxVector.x < m_GameManager.leftBoundX || auxVector.y < m_GameManager.bottomBoundY || auxVector.x > m_GameManager.rightBoundX || auxVector.y > m_GameManager.topBoundY)
                 return;
