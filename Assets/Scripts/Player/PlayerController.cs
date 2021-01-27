@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            GameDataCollector.CoinReceived();
             Destroy(other.gameObject);
         }
     }

@@ -38,11 +38,13 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void DestroyAllEnemies()
+    public void DestroyAllEnemies(bool countAsEnemyKilled)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
+            if (countAsEnemyKilled)
+                GameDataCollector.EnemyKilled();
             StartCoroutine(enemy.GetComponent<EnemyController>().Destroying());
         }
     }

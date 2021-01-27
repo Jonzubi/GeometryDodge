@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int destroyCoinsInSecond = 3;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
+    GameDataCollector m_gameDataCollector;
     int round = 1;
     int enemiesLeft;
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     {
         m_spawnManager = FindObjectOfType<SpawnManager>();
         m_canvasManager = FindObjectOfType<CanvasManager>();
+        m_gameDataCollector = new GameDataCollector();
 
         float auxBoundY = Camera.main.orthographicSize;    
         float auxBoundX = auxBoundY * Screen.width / Screen.height;
@@ -70,10 +72,11 @@ public class GameManager : MonoBehaviour
         for (;startTimeLeft > 0; startTimeLeft--)
         {
             m_canvasManager.SetTimeLeftInfoText($"Survive: {startTimeLeft} s");
+            GameDataCollector.AddTimeSurvived(1f);
             yield return new WaitForSeconds(1);
         }
 
-        m_spawnManager.DestroyAllEnemies();
+        m_spawnManager.DestroyAllEnemies(true);
         m_spawnManager.SpawnCoins(round);
         m_canvasManager.SetTimeLeftInfoText($"LOOT!");
         round++;
@@ -83,7 +86,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         StopAllCoroutines();
-        m_spawnManager.DestroyAllEnemies();
+        m_spawnManager.DestroyAllEnemies(false);
         m_canvasManager.SetGameOverTexts();
     }
 }
