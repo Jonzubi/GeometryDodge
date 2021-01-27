@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        round = 1;
         GameDataCollector.ResetData();
         m_spawnManager.InstantiatePlayer();
         StartRound(3);
