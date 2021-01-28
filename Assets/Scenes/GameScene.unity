@@ -847,6 +847,7 @@ MonoBehaviour:
   bottomBoundY: 0
   timeLeftSecsPerEnemy: 10
   destroyCoinsInSecond: 3
+  round: 1
 --- !u!1 &718118002
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         {
             if (countAsEnemyKilled)
                 GameDataCollector.EnemyKilled();
-            StartCoroutine(enemy.GetComponent<EnemyController>().Destroying());
+            StartCoroutine(enemy.GetComponent<DestroyEnemy>().Destroying());
         }
     }
 

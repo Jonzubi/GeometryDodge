@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int destroyCoinsInSecond = 3;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
-    int round = 1;
+    public int round = 1;
     int enemiesLeft;
 
 

@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
         // Tiempo inofensivo
         Color auxColor = GetComponent<SpriteRenderer>().color;
-        GetComponent<CircleCollider2D>().enabled = false;
+        m_circleCollider.enabled = false;
 
         float startBlinking = 0;
         while(startBlinking <= m_inoffensiveTime)
@@ -44,14 +44,7 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(m_blinkTime);
             startBlinking += m_blinkTime * 2;
         }
-        GetComponent<CircleCollider2D>().enabled = true;
-    }
-
-    public IEnumerator Destroying()
-    {
-        LeanTween.scale(gameObject, new Vector3(0, 0, 0), m_spawnTime);
-        yield return new WaitForSeconds(m_spawnTime);
-        Destroy(gameObject);
+        m_circleCollider.enabled = true;
     }
 
     void Update()
