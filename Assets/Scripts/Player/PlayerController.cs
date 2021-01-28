@@ -23,10 +23,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        bool touching = Debug.isDebugBuild ? Input.GetMouseButtonDown(0) : Input.touchCount > 0;
+        bool touching = Input.GetMouseButtonDown(0) || Input.touchCount > 0;
         if (touching)
         {
-            Vector2 touchPosition = Debug.isDebugBuild ? (Vector2)Input.mousePosition : Input.GetTouch(0).position;
+            Vector2 touchPosition;
+            if (Input.touchCount > 0)
+                touchPosition = Input.GetTouch(0).position;
+            else
+                touchPosition = (Vector2)Input.mousePosition;
             Vector3 auxVector = Camera.main.ScreenToWorldPoint(touchPosition);
 
             if (auxVector.x < m_GameManager.leftBoundX || auxVector.y < m_GameManager.bottomBoundY || auxVector.x > m_GameManager.rightBoundX || auxVector.y > m_GameManager.topBoundY)
