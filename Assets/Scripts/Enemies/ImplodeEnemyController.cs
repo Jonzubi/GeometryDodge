@@ -44,6 +44,7 @@ public class ImplodeEnemyController : MonoBehaviour
             Instantiate(rightImplodeBullet, transform.position, rightImplodeBullet.transform.rotation);
             yield return new WaitForSeconds(0.25f);
         }
+        StartCoroutine(GetComponent<DestroyEnemy>().Destroying());
     }
 
     IEnumerator Spawning()

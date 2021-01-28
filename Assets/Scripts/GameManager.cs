@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(RoundTimeLeftCounter());
         m_canvasManager.SetSecondsInfoText("");
-        m_spawnManager.SpawnEnemies(round);
+        m_spawnManager.SpawnEnemies();
         enemiesLeft = round;
     }
 

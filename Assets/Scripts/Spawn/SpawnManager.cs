@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin, m_player, m_pointer;
+    public GameObject m_circle, m_coin, m_player, m_pointer, m_implode;
     GameManager m_GameManager;
     void Awake()
     {
@@ -20,7 +20,15 @@ public class SpawnManager : MonoBehaviour
 
     void InstantiateEnemy()
     {
-        Instantiate(m_circle, GetRandomPos(), m_circle.transform.rotation);
+        GameObject spawnEnemy = m_circle;
+        if (m_GameManager.round >= 3)
+        {
+            // A partir de la ronda 3 hay un 10% de probabilidad para que salga el implode (por cada enemigo ademas)
+            bool maySpawnImplode = Random.Range(1, 10) == 1;
+            if (maySpawnImplode)
+                spawnEnemy = m_implode;
+        }
+        Instantiate(spawnEnemy, GetRandomPos(), spawnEnemy.transform.rotation);
     }
 
     Vector3 GetRandomPos ()
@@ -36,9 +44,9 @@ public class SpawnManager : MonoBehaviour
         return Random.Range(min, max);
     }
 
-    public void SpawnEnemies (int round)
+    public void SpawnEnemies ()
     {
-        for (int i = 0; i < round; i++)
+        for (int i = 0; i < m_GameManager.round; i++)
         {
             InstantiateEnemy();
         }

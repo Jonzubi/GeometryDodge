@@ -96,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34fa18ba1f4f5340b5070693789f9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftImplodeBullet: {fileID: 0}
-  rightImplodeBullet: {fileID: 0}
+  leftImplodeBullet: {fileID: 474967549395814060, guid: e2f16bac6e7f0a643afc382e6995f08a,
+    type: 3}
+  rightImplodeBullet: {fileID: 6770229943469035051, guid: d2a40f09d6bc54940b341db16cca56e4,
+    type: 3}
   m_moveSpeed: 3
   m_spawnTime: 0.5
   m_inoffensiveTime: 1
