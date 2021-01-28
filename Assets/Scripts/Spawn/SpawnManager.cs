@@ -21,10 +21,13 @@ public class SpawnManager : MonoBehaviour
     void InstantiateEnemy()
     {
         GameObject spawnEnemy = m_circle;
-        if (m_GameManager.round >= 3)
+        if (m_GameManager.round >= 2)
         {
-            // A partir de la ronda 3 hay un 10% de probabilidad para que salga el implode (por cada enemigo ademas)
-            bool maySpawnImplode = Random.Range(1, 10) <= 3;
+            // A partir de la ronda 2 hay un 10% de probabilidad para que salga el implode (por cada enemigo ademas)
+            float random = Random.Range(1, 10);
+            Debug.Log($"random: {random}");
+            bool maySpawnImplode = random <= 3;
+            
             if (maySpawnImplode)
                 spawnEnemy = m_implode;
         }
