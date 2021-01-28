@@ -25,7 +25,6 @@ public class SpawnManager : MonoBehaviour
         {
             // A partir de la ronda 2 hay un 10% de probabilidad para que salga el implode (por cada enemigo ademas)
             float random = Random.Range(1, 10);
-            Debug.Log($"random: {random}");
             bool maySpawnImplode = random <= 3;
             
             if (maySpawnImplode)
