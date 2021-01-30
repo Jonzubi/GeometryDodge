@@ -10,20 +10,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject txtLevel, txtCoins;
     void Awake()
     {
-        // Crear o leer el archivo userData
-        if (!File.Exists($"{Application.persistentDataPath}/UserData.json"))
-        {
-            UserData userData = new UserData();
-            string userDataJson = JsonUtility.ToJson(userData);
-            File.WriteAllText($"{Application.persistentDataPath}/UserData.json", userDataJson);
-            UserDataToCanvas(userData);
-        }
-        else
-        {
-            string userDataJson = File.ReadAllText($"{Application.persistentDataPath}/UserData.json");
-            UserData userData = JsonUtility.FromJson<UserData>(userDataJson);
-            UserDataToCanvas(userData);
-        }
+        UserDataKeeper.LoadUserData();
+        UserDataToCanvas(UserDataKeeper.userData);
     }
 
     void UserDataToCanvas(UserData userData)
