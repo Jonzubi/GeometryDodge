@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        bool touching = Input.GetMouseButtonDown(0) || Input.touchCount > 0;
+        bool touching = Input.GetMouseButton(0) || Input.touchCount > 0;
         if (touching)
         {
             Vector2 touchPosition;
