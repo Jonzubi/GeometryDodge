@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{    
+{   
+    public GameObject HUDBackground; 
     [HideInInspector]
     public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
     public int timeLeftSecsPerEnemy = 10;
@@ -25,7 +26,14 @@ public class GameManager : MonoBehaviour
         leftBoundX = -auxBoundX;
         rightBoundX = auxBoundX;
         topBoundY = auxBoundY;
-        bottomBoundY = -auxBoundY + auxBoundY * 0.4f;
+        bottomBoundY = -auxBoundY + auxBoundY * 0.400f;
+
+        Debug.Log($"bottom: {bottomBoundY}");
+        Debug.Log($"auxY: {auxBoundY}");
+
+        // Colocamos el HUDBackground en la posicion para que haga como limite entre el espacio de juego y el lanza items
+        RectTransform auxRect = HUDBackground.GetComponent<RectTransform>();
+        auxRect.sizeDelta = new Vector2(auxRect.sizeDelta.x, auxBoundY * 0.400f * 100);
     }
 
     void Start()
