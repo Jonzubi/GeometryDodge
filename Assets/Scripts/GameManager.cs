@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        UserDataKeeper.LoadUserData();
         m_spawnManager = FindObjectOfType<SpawnManager>();
         m_canvasManager = FindObjectOfType<CanvasManager>();
 
@@ -95,6 +96,10 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         m_spawnManager.DestroyAllEnemies(false);
         m_canvasManager.SetGameOverTexts();
+
+        // TODO como prueba de si se guarda algo, añadir mas cosas en el futuro
+        UserDataKeeper.userData.totalCoins += GameDataCollector.m_coinsReceived;
+        UserDataKeeper.SaveUserData();
     }
 
     public void RestartGame()
