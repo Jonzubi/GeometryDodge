@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {   
-    public GameObject HUDBackground; 
+    public Canvas SlotsCanvas;
+    public GameObject HUDBackground;
+    [Range(0, 1)] 
+    public float HUDRelativeHeight = 0.350f;
     [HideInInspector]
     public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
     public int timeLeftSecsPerEnemy = 10;
@@ -27,11 +30,22 @@ public class GameManager : MonoBehaviour
         leftBoundX = -auxBoundX;
         rightBoundX = auxBoundX;
         topBoundY = auxBoundY;
-        bottomBoundY = -auxBoundY + auxBoundY * 0.350f;
+        bottomBoundY = -auxBoundY + auxBoundY * HUDRelativeHeight;
 
-        // Colocamos el HUDBackground en la posicion para que haga como limite entre el espacio de juego y el lanza items
+        // Ponemos el Canvas de los Slots en el bottomBoundY y escalamos los Slots para adaptar a la pantalla
+        // EL / 200 es por que me gusta la relacion aspecto en el 200 height del HUD y 200 de los slots
+        // El - 0.5f es por la radio de los enemigos
+
+        HUDBackground.transform.position = WorldToUISpace(SlotsCanvas, new Vector2(0, bottomBoundY - 0.5f));
         RectTransform auxRect = HUDBackground.GetComponent<RectTransform>();
-        auxRect.sizeDelta = new Vector2(auxRect.sizeDelta.x, auxBoundY * 0.350f * 100);
+        auxRect.sizeDelta = new Vector2(auxRect.sizeDelta.x, auxRect.anchoredPosition.y);
+        GameObject[] slots = GameObject.FindGameObjectsWithTag("Slot");
+
+        foreach (GameObject slot in slots)
+        {
+            float scaleFactor = auxRect.anchoredPosition.y / 200;
+            slot.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        }
     }
 
     void Start()
@@ -111,5 +125,17 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public Vector3 WorldToUISpace(Canvas parentCanvas, Vector3 worldPos)
+    {
+        //Convert the world for screen point so that it can be used with ScreenPointToLocalPointInRectangle function
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        Vector2 movePos;
+
+        //Convert the screenpoint to ui rectangle local point
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, screenPos, parentCanvas.worldCamera, out movePos);
+        //Convert the local point to world point
+        return parentCanvas.transform.TransformPoint(movePos);
     }
 }

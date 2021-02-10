@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
                 touchPosition = (Vector2)Input.mousePosition;
             Vector3 auxVector = Camera.main.ScreenToWorldPoint(touchPosition);
 
-            if (auxVector.x < m_GameManager.leftBoundX || auxVector.y < m_GameManager.bottomBoundY || auxVector.x > m_GameManager.rightBoundX || auxVector.y > m_GameManager.topBoundY)
+            if (auxVector.x < m_GameManager.leftBoundX || auxVector.y < m_GameManager.bottomBoundY - 0.5f || auxVector.x > m_GameManager.rightBoundX || auxVector.y > m_GameManager.topBoundY)
                 return;
             auxVector.z = -1;
             targetPosition = auxVector;

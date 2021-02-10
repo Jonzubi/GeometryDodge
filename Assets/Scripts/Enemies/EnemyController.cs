@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
         if (actualPosition.x  + m_circleCollider.radius >= m_gameManager.rightBoundX)
             m_moveDirection = new Vector2(-Mathf.Abs(m_moveDirection.x), m_moveDirection.y);
         
-        if (actualPosition.y <= m_gameManager.bottomBoundY + m_circleCollider.radius)
+        if (actualPosition.y <= m_gameManager.bottomBoundY)
             m_moveDirection = new Vector2(m_moveDirection.x, Mathf.Abs(m_moveDirection.y));
 
         if (actualPosition.y  + m_circleCollider.radius >= m_gameManager.topBoundY)
