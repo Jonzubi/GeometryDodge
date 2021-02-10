@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InventoryController))]
 public class PlayerController : MonoBehaviour
 {
     public float m_playerMovement = 1f;
     public float m_rotateSpeed = 0.1f;
 
+    InventoryController m_inventory;
     GameManager m_GameManager;
     SpawnManager m_SpawnManager;
     PointerManager m_PointerManager;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
         m_GameManager = FindObjectOfType<GameManager>();
         m_SpawnManager = FindObjectOfType<SpawnManager>();
         m_PointerManager = FindObjectOfType<PointerManager>();
+        m_inventory = GetComponent<InventoryController>();
         targetPosition = transform.position;
     }
 
@@ -62,10 +65,20 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Coin"))
+        switch (other.tag)
         {
-            GameDataCollector.CoinReceived();
-            Destroy(other.gameObject);
+            case "Coin":
+                GameDataCollector.CoinReceived();
+                Destroy(other.gameObject);
+                break;
+            case "PowerUp":
+                PowerUp auxPowerUp = other.gameObject.GetComponent<PowerUp>();
+                m_inventory.addItem(new Item(auxPowerUp.itemId, auxPowerUp.itemAmount));
+                Destroy(other.gameObject);
+                break;
+            default:
+                break;
+
         }
     }
 

@@ -1717,6 +1717,8 @@ MonoBehaviour:
     type: 3}
   m_implode: {fileID: 254994406041853596, guid: 58877f9650a571648a969111a90b54b4,
     type: 3}
+  m_bullet_pickable: {fileID: 7454526742975169981, guid: 576216f4f4375ba4a83f23de0f3a705c,
+    type: 3}
 --- !u!1 &1005449918
 GameObject:
   m_ObjectHideFlags: 0

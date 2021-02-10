@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class UserData
 {
-    public int level;
-    public int totalXP;
-    public int totalCoins;
-    public int unlockedSlots;
-    public List<Item> items;
-    public int maxInventory;
+    public int level; // El nivel del jugador
+    public int totalXP; // Total de XP
+    public int totalCoins; // Total de monedas
+    public int unlockedSlots; // La cantidad de slots desbloqueada
+    public List<Item> items; // Los items que tiene en su inventario, fuera de juego
+    public int maxInventory; // Su cantidad maxima de cosas que puede guardar, fuera de juego
 
     public UserData()
     {
@@ -28,6 +28,12 @@ public class Item
 {
     public int id;
     public int itemAmount;
+
+    public Item(int id, int itemAmount)
+    {
+        this.id = id;
+        this.itemAmount = itemAmount;
+    }
 }
 
 public enum ItemName

@@ -13,9 +13,10 @@ public class GameManager : MonoBehaviour
     public float leftBoundX, rightBoundX, topBoundY, bottomBoundY;
     public int timeLeftSecsPerEnemy = 10;
     public int destroyCoinsInSecond = 3;
+    public int round = 1;
     SpawnManager m_spawnManager;
     CanvasManager m_canvasManager;
-    public int round = 1;
+    SlotsController m_hudSlotsController;
     int enemiesLeft;
 
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         UserDataKeeper.LoadUserData();
         m_spawnManager = FindObjectOfType<SpawnManager>();
         m_canvasManager = FindObjectOfType<CanvasManager>();
+        m_hudSlotsController = FindObjectOfType<SlotsController>();
 
         float auxBoundY = Camera.main.orthographicSize;    
         float auxBoundX = auxBoundY * Screen.width / Screen.height;
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour
 
         m_spawnManager.DestroyAllEnemies(true);
         m_spawnManager.SpawnCoins(round);
+        m_spawnManager.SpawnPowerUps(round);
         m_canvasManager.SetTimeLeftInfoText($"LOOT!");
         round++;
         StartRound(15);
@@ -137,5 +140,10 @@ public class GameManager : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, screenPos, parentCanvas.worldCamera, out movePos);
         //Convert the local point to world point
         return parentCanvas.transform.TransformPoint(movePos);
+    }
+
+    public void RenderHUDSlots(List<Item> items)
+    {
+        m_hudSlotsController.RenderSlots(items);
     }
 }

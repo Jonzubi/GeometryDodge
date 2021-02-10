@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin, m_player, m_pointer, m_implode;
+    public GameObject m_circle, m_coin, m_player, m_pointer, m_implode, m_bullet_pickable;
     GameManager m_GameManager;
     void Awake()
     {
@@ -80,6 +80,18 @@ public class SpawnManager : MonoBehaviour
 
             LeanTween.move(coin, randomEndPos, randomTime).setEaseInOutBack();
         }
+    }
+
+    public void SpawnPowerUps(int round)
+    {
+        float powerUpsSpawnHigh = 10;
+
+        // Por ahora instanciaré un bullet al final de cada ronda, en el futuro cambiar esto por probabilidades
+        float randomX = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
+        Vector2 randomEndPos = GetRandomPos();
+        GameObject bullet = Instantiate(m_bullet_pickable, new Vector2(randomX, powerUpsSpawnHigh), m_bullet_pickable.transform.rotation);
+
+        LeanTween.move(bullet, randomEndPos, 1f).setEaseInOutBack();
     }
 
     public void DestroyCoins(int timeLeft)

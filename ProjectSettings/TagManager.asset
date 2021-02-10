@@ -8,6 +8,7 @@ TagManager:
   - Pointer
   - Coin
   - Slot
+  - PowerUp
   layers:
   - Default
   - TransparentFX
