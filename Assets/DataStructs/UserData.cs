@@ -27,6 +27,10 @@ public class UserData
 public class Item
 {
     public int id;
-    public string name;
     public int itemAmount;
+}
+
+public enum ItemName
+{
+    BULLET
 }
