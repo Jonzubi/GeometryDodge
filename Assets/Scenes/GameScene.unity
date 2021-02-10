@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotsCanvas: {fileID: 627888486}
   HUDBackground: {fileID: 1303088241}
-  HUDRelativeHeight: 0.501
+  HUDRelativeHeight: 0.45
   leftBoundX: 0
   rightBoundX: 0
   topBoundY: 0
