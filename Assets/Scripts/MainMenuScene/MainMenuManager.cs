@@ -33,4 +33,10 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetDataBtnClick()
+    {
+        UserDataKeeper.userData = new UserData();
+        UserDataKeeper.SaveUserData();
+    }
 }
