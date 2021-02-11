@@ -13,16 +13,7 @@ public class SlotsController : MonoBehaviour
     {
         unlockedSlots = UserDataKeeper.userData.unlockedSlots;
 
-        // TODO: Por el momento solo escondere las imagenes, en el futuro habria que cambioar las imagenes del candado por el objeto que haya metido el usuario
-        for(int i=0; i < unlockedSlots;i++)
-        {
-            Image[] images = slots[i].GetComponentsInChildren<Image>();
-            foreach (Image image in images)
-            {
-                if (image.gameObject.name == "SlotImage")
-                    image.gameObject.SetActive(false);
-            }
-        }
+        RenderSlots(new List<Item>()); // TODO: Por el momento inicializo con inventario vacio, en un futuro habrá que meter el inventario que se configure fuera de juego
     }
 
     public void RenderSlots(List<Item> items)
@@ -42,15 +33,20 @@ public class SlotsController : MonoBehaviour
                     if (i > items.Count - 1)
                     {
                         image.gameObject.SetActive(false); // En este punto tiene vacio el inventario
+                        GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
+                        text.SetActive(false);
                     }
                     else
                     {
                         image.sprite = itemSprites[items[i].id]; // Cargar la imagen del item
                         image.gameObject.SetActive(true);
+
+                        GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
+                        text.GetComponent<Text>().text = items[i].itemAmount.ToString();
+                        text.SetActive(true);
                     }
                 }                    
-            }
-            
+            }            
         }
     }
 }
