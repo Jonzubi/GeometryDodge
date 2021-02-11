@@ -26,13 +26,18 @@ public class UserData
     {
         foreach (Item collectedItem in collectedItems)
         {
+            bool added = false;
             foreach (Item item in items)
             {
                 if (collectedItem.id == item.id)
                 {
                     item.itemAmount += collectedItem.itemAmount;
+                    added = true;
                 }
             }
+
+            if (added)
+                continue;
 
             if (items.Count < maxInventory)
             {
