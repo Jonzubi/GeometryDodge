@@ -15,8 +15,6 @@ public class InventoryController : MonoBehaviour
 
     public bool addItem(Item newItem)
     {
-        if (items.Count == maxCapacity)
-            return false;
         foreach (Item item in items)
         {
             if (item.id == newItem.id)
@@ -25,6 +23,9 @@ public class InventoryController : MonoBehaviour
                 return true;
             }
         }
+        if (items.Count == maxCapacity)
+            return false;
+        
         items.Add(newItem);
         return true;
     }
