@@ -32,7 +32,6 @@ public class SlotsController : MonoBehaviour
             Debug.LogError($"Hay {unlockedSlots} unlockedSlots y vienen {items.Count} en el array items");
             return;
         }
-    Debug.Log("WHAT");
         for(int i=0; i < unlockedSlots;i++)
         {
             Image[] images = slots[i].GetComponentsInChildren<Image>(true);
@@ -40,7 +39,6 @@ public class SlotsController : MonoBehaviour
             {
                 if (image.gameObject.name == "SlotImage")
                 {
-                    Debug.Log($"i es {i}, items.Count - 1 es {items.Count - 1}");
                     if (i > items.Count - 1)
                     {
                         image.gameObject.SetActive(false); // En este punto tiene vacio el inventario
