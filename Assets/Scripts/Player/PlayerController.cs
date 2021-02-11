@@ -73,8 +73,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case "PowerUp":
                 PowerUp auxPowerUp = other.gameObject.GetComponent<PowerUp>();
-                m_inventory.addItem(new Item(auxPowerUp.itemId, auxPowerUp.itemAmount));
-                Destroy(other.gameObject);
+                bool hasTaken = m_inventory.addItem(new Item(auxPowerUp.itemId, auxPowerUp.itemAmount));
+                if (hasTaken)
+                {
+                    Destroy(other.gameObject);
+                    m_GameManager.RenderHUDSlots(m_inventory.items);
+                }                    
                 break;
             default:
                 break;

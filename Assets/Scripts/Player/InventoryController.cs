@@ -5,22 +5,27 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     public List<Item> items;
+    int maxCapacity;
 
     void Awake()
     {
-        items = new List<Item>();    
+        items = new List<Item>();
+        maxCapacity = UserDataKeeper.userData.unlockedSlots;
     }
 
-    public void addItem(Item newItem)
+    public bool addItem(Item newItem)
     {
+        if (items.Count == maxCapacity)
+            return false;
         foreach (Item item in items)
         {
             if (item.id == newItem.id)
             {
                 item.itemAmount += newItem.itemAmount;
-                return;
+                return true;
             }
         }
         items.Add(newItem);
+        return true;
     }
 }

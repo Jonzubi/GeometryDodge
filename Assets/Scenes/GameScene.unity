@@ -2477,6 +2477,8 @@ MonoBehaviour:
   - {fileID: 1048573496}
   - {fileID: 1539913459}
   - {fileID: 1513645357}
+  itemSprites:
+  - {fileID: 21300000, guid: 18c7ecabd57338b44b3d82322d8eafc5, type: 3}
 --- !u!1 &1360571051
 GameObject:
   m_ObjectHideFlags: 0
