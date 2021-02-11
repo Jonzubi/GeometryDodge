@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         round = 1;
         GameDataCollector.ResetData();
         m_spawnManager.InstantiatePlayer();
+        m_hudSlotsController.RenderSlots(new List<Item>());
         StartRound(3);
     }
 
@@ -108,14 +109,14 @@ public class GameManager : MonoBehaviour
         StartRound(15);
     }
 
-    public void GameOver()
+    public void GameOver(List<Item> collectedItems)
     {
         StopAllCoroutines();
         m_spawnManager.DestroyAllEnemies(false);
         m_canvasManager.SetGameOverTexts();
 
-        // TODO como prueba de si se guarda algo, añadir mas cosas en el futuro
         UserDataKeeper.userData.totalCoins += GameDataCollector.m_coinsReceived;
+        UserDataKeeper.userData.CollectItems(collectedItems);
         UserDataKeeper.SaveUserData();
     }
 

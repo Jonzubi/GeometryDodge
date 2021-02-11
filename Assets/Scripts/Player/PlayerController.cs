@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             m_PointerManager.HidePointer();
             Destroy(gameObject);
-            m_GameManager.GameOver();
+            m_GameManager.GameOver(m_inventory.items);
         }   
     }
 }

@@ -21,6 +21,25 @@ public class UserData
         items = new List<Item>();
         maxInventory = 10;
     }
+
+    public void CollectItems(List<Item> collectedItems)
+    {
+        foreach (Item collectedItem in collectedItems)
+        {
+            foreach (Item item in items)
+            {
+                if (collectedItem.id == item.id)
+                {
+                    item.itemAmount += collectedItem.itemAmount;
+                }
+            }
+
+            if (items.Count < maxInventory)
+            {
+                items.Add(collectedItem);
+            }
+        }
+    }
 }
 
 [System.Serializable]
