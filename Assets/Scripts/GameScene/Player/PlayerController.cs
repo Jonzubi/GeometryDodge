@@ -32,10 +32,14 @@ public class PlayerController : MonoBehaviour
         if (isOutOfBounds.x < m_GameManager.leftBoundX || isOutOfBounds.y < m_GameManager.bottomBoundY - 0.5f || isOutOfBounds.x > m_GameManager.rightBoundX || isOutOfBounds.y > m_GameManager.topBoundY)
             return;
 
-        transform.Translate(moveTo * m_playerMovement * Time.deltaTime, Space.World);
-        float angle = Mathf.Atan2(moveTo.x, moveTo.y) * Mathf.Rad2Deg;
-        Vector3 auxAngles = transform.rotation.eulerAngles;
-        transform.eulerAngles = new Vector3(auxAngles.x, auxAngles.y, -angle);
+        if (moveTo != Vector2.zero)
+        {
+            transform.Translate(moveTo * m_playerMovement * Time.deltaTime, Space.World);
+            float angle = Mathf.Atan2(moveTo.x, moveTo.y) * Mathf.Rad2Deg;
+            Vector3 auxAngles = transform.rotation.eulerAngles;
+            transform.eulerAngles = new Vector3(auxAngles.x, auxAngles.y, -angle);
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
