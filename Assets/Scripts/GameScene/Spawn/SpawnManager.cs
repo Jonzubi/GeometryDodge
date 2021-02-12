@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin, m_player, m_pointer, m_implode, m_bullet_pickable;
+    public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable;
     GameManager m_GameManager;
     void Awake()
     {
@@ -14,7 +14,6 @@ public class SpawnManager : MonoBehaviour
     public void InstantiatePlayer()
     {
         Vector3 randomPos = GetRandomPos();
-        Instantiate(m_pointer, randomPos, m_player.transform.rotation);
         Instantiate(m_player, randomPos, m_player.transform.rotation);
     }
 

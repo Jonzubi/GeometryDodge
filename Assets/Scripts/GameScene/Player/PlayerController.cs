@@ -5,60 +5,37 @@ public class PlayerController : MonoBehaviour
 {
     public float m_playerMovement = 1f;
     public float m_rotateSpeed = 0.1f;
+    FixedJoystick m_playerJoystick;
 
     InventoryController m_inventory;
     GameManager m_GameManager;
     SpawnManager m_SpawnManager;
-    PointerManager m_PointerManager;
     Vector3 targetPosition;
-    bool m_isMoving = false;
 
     void Awake()
     {
+        m_playerJoystick = FindObjectOfType<FixedJoystick>();
         m_GameManager = FindObjectOfType<GameManager>();
         m_SpawnManager = FindObjectOfType<SpawnManager>();
-        m_PointerManager = FindObjectOfType<PointerManager>();
         m_inventory = GetComponent<InventoryController>();
         targetPosition = transform.position;
     }
 
     void Update()
     {
-        bool touching = Input.GetMouseButton(0) || Input.touchCount > 0;
-        if (touching)
-        {
-            Vector2 touchPosition;
-            if (Input.touchCount > 0)
-                touchPosition = Input.GetTouch(0).position;
-            else
-                touchPosition = (Vector2)Input.mousePosition;
-            Vector3 auxVector = Camera.main.ScreenToWorldPoint(touchPosition);
+        float horizontal = m_playerJoystick.Horizontal;
+        float vertical = m_playerJoystick.Vertical;
 
-            if (auxVector.x < m_GameManager.leftBoundX || auxVector.y < m_GameManager.bottomBoundY - 0.5f || auxVector.x > m_GameManager.rightBoundX || auxVector.y > m_GameManager.topBoundY)
-                return;
-            auxVector.z = -1;
-            targetPosition = auxVector;
-            m_PointerManager.PointTo(targetPosition);
-            m_isMoving = true;
-        }
-    }
+        Vector2 moveTo = new Vector2(horizontal, vertical).normalized;
+        Vector2 isOutOfBounds = (Vector2)transform.position + (moveTo * m_playerMovement * Time.deltaTime);
 
-    void FixedUpdate()
-    {
-        Vector3 moveVector = targetPosition - transform.position;
-        if (moveVector.magnitude < 0.1f)
-        {
-            transform.position = targetPosition;
-            m_PointerManager.HidePointer();
-            m_isMoving = false;
-        }            
+        if (isOutOfBounds.x < m_GameManager.leftBoundX || isOutOfBounds.y < m_GameManager.bottomBoundY - 0.5f || isOutOfBounds.x > m_GameManager.rightBoundX || isOutOfBounds.y > m_GameManager.topBoundY)
+            return;
 
-        if (m_isMoving)
-        {
-            transform.Translate(moveVector.normalized * m_playerMovement * Time.deltaTime, Space.World);
-            float angle = Mathf.Atan2(moveVector.x, moveVector.y) * Mathf.Rad2Deg;
-            LeanTween.rotateZ(gameObject, -angle, m_rotateSpeed);
-        }
+        transform.Translate(moveTo * m_playerMovement * Time.deltaTime, Space.World);
+        float angle = Mathf.Atan2(moveTo.x, moveTo.y) * Mathf.Rad2Deg;
+        Vector3 auxAngles = transform.rotation.eulerAngles;
+        transform.eulerAngles = new Vector3(auxAngles.x, auxAngles.y, -angle);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -88,7 +65,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            m_PointerManager.HidePointer();
             Destroy(gameObject);
             m_GameManager.GameOver(m_inventory.items);
         }   
