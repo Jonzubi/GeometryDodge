@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public int itemId;
+    public ItemName itemId;
     public int itemAmount = 1; // Generalmente será 1 (itemAmount es la cantidad que se sumará al inventario)
 }

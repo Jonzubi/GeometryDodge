@@ -50,10 +50,10 @@ public class UserData
 [System.Serializable]
 public class Item
 {
-    public int id;
+    public ItemName id;
     public int itemAmount;
 
-    public Item(int id, int itemAmount)
+    public Item(ItemName id, int itemAmount)
     {
         this.id = id;
         this.itemAmount = itemAmount;

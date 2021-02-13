@@ -37,7 +37,7 @@ public class InventoryPanelController : MonoBehaviour
             {
                 if (item != null)
                 {
-                    image.sprite = itemSprites[item.id]; // Cargar la imagen del item
+                    image.sprite = itemSprites[(int)item.id]; // Cargar la imagen del item
                     image.gameObject.SetActive(true);
 
                     GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
