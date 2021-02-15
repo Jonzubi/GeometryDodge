@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable;
+    public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable, m_bullet_usable;
     GameManager m_GameManager;
     void Awake()
     {
@@ -99,6 +99,18 @@ public class SpawnManager : MonoBehaviour
         foreach (GameObject coin in coins)
         {
             StartCoroutine(coin.GetComponent<CoinController>().StartDisappearing(timeLeft));
+        }
+    }
+
+    public void OnItemUsed(ItemName itemName, Vector3 position, Quaternion rotation)
+    {
+        switch(itemName)
+        {
+            case ItemName.BULLET:
+                Instantiate(m_bullet_usable, position, rotation);
+                break;
+            default:
+                break;
         }
     }
 }

@@ -7,6 +7,8 @@ public class SlotsController : MonoBehaviour
 {
     public GameObject[] slots;
     public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
+
+    PlayerController playerController;
     int unlockedSlots;
     
     void Awake()
@@ -48,5 +50,12 @@ public class SlotsController : MonoBehaviour
                 }                    
             }            
         }
+    }
+
+    public void OnSlotClick(int slotId)
+    {
+        if (!playerController)
+            playerController = FindObjectOfType<PlayerController>();
+        playerController.OnItemUsed(slotId);
     }
 }

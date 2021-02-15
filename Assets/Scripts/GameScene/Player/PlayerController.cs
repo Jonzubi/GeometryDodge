@@ -42,6 +42,13 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    // Esta funcion es llamada desde SlotsController, se produce cuando un Slot en el HUD es pulsado.
+    public void OnItemUsed(int slotId)
+    {
+        m_inventory.OnItemUsed(slotId, transform.position, transform.rotation);
+        m_GameManager.RenderHUDSlots(m_inventory.items);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         switch (other.tag)
