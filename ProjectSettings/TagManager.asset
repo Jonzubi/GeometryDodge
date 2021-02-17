@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Slot
   - PowerUp
+  - UsingPowerUp
   layers:
   - Default
   - TransparentFX

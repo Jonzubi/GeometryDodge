@@ -19,7 +19,6 @@ public class InventoryPanelController : MonoBehaviour
 
     void SpawnSlots()
     {
-        Debug.Log(items);
         for (int i = 0; i < maxInventory; i++)
         {
             Item auxItem = items.Count > i ? items[i] : null;
