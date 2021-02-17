@@ -12,11 +12,13 @@ public class EnemyController : MonoBehaviour
     GameManager m_gameManager;
     Vector2 m_moveDirection;
     CircleCollider2D m_circleCollider;
+    DestroyEnemy m_destroyEnemy; // El script que sirve para destruirme a mí mismo
 
     void Awake()
     {
         m_gameManager = FindObjectOfType<GameManager>();
         m_circleCollider = GetComponent<CircleCollider2D>();
+        m_destroyEnemy = GetComponent<DestroyEnemy>();
         gameObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
@@ -64,5 +66,14 @@ public class EnemyController : MonoBehaviour
             m_moveDirection = new Vector2(m_moveDirection.x, -Mathf.Abs(m_moveDirection.y));
 
         transform.Translate(m_moveDirection * m_moveSpeed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("UsingPowerUp"))
+        {
+            StartCoroutine(m_destroyEnemy.Destroying());
+            Destroy(other.gameObject);
+        }
     }
 }
