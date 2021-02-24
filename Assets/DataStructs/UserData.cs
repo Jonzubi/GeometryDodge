@@ -62,5 +62,6 @@ public class Item
 
 public enum ItemName
 {
-    BULLET
+    BULLET,
+    SHIELD
 }
