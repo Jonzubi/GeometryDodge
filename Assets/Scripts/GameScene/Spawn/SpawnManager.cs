@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable, m_bullet_usable;
+    public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable, m_bullet_usable, m_shield_pickable, m_shield_usable;
     GameManager m_GameManager;
     void Awake()
     {
@@ -90,7 +90,13 @@ public class SpawnManager : MonoBehaviour
         Vector2 randomEndPos = GetRandomPos();
         GameObject bullet = Instantiate(m_bullet_pickable, new Vector2(randomX, powerUpsSpawnHigh), m_bullet_pickable.transform.rotation);
 
+        //Tambien instaciare un shield como testeo
+        float randomX2 = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
+        Vector2 randomEndPos2 = GetRandomPos();
+        GameObject shield = Instantiate(m_shield_pickable, new Vector2(randomX2, powerUpsSpawnHigh), m_shield_pickable.transform.rotation);
+
         LeanTween.move(bullet, randomEndPos, 1f).setEaseInOutBack();
+        LeanTween.move(shield, randomEndPos2, 1f).setEaseInOutBack();
     }
 
     public void DestroyCoins(int timeLeft)
@@ -108,6 +114,10 @@ public class SpawnManager : MonoBehaviour
         {
             case ItemName.BULLET:
                 Instantiate(m_bullet_usable, position, rotation);
+                break;
+            case ItemName.SHIELD:
+                GameObject player = FindObjectOfType<PlayerController>().gameObject;
+                Instantiate(m_shield_usable, player.transform);
                 break;
             default:
                 break;
