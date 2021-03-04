@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4888423304513762784}
   - component: {fileID: 5252194954009343408}
   - component: {fileID: 9096397024808983990}
+  - component: {fileID: 7509034396510857125}
   m_Layer: 0
   m_Name: Shield
   m_TagString: UsingPowerUp
@@ -98,3 +99,15 @@ CircleCollider2D:
   m_Offset: {x: -0.004776001, y: 0}
   serializedVersion: 2
   m_Radius: 1.361023
+--- !u!114 &7509034396510857125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077433284456872704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46be9bf91dd4f17449b87a455f814555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
