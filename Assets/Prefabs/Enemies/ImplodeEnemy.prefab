@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 254994406041853592}
   - component: {fileID: 254994406041853599}
   - component: {fileID: 575108823885505267}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ImplodeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

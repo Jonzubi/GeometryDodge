@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 474967549395814061}
   - component: {fileID: 5900510991657590148}
   - component: {fileID: -4304469315539522966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftImplodeCircles
   m_TagString: Enemy
   m_Icon: {fileID: 0}
