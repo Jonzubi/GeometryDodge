@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public float m_playerMovement = 1f;
     public float m_rotateSpeed = 0.1f;
-    FixedJoystick m_playerJoystick;
+    FloatingJoystick m_playerJoystick;
 
     InventoryController m_inventory;
     GameManager m_GameManager;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        m_playerJoystick = FindObjectOfType<FixedJoystick>();
+        m_playerJoystick = FindObjectOfType<FloatingJoystick>();
         m_GameManager = FindObjectOfType<GameManager>();
         m_SpawnManager = FindObjectOfType<SpawnManager>();
         m_inventory = GetComponent<InventoryController>();
