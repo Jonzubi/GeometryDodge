@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryPanelController : MonoBehaviour
 {
-    public GameObject m_slotPrefab;
+    public GameObject m_slotPrefab, m_addSlotPrefab;
     public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
     List<Item> items;
     int maxInventory;
@@ -24,6 +24,7 @@ public class InventoryPanelController : MonoBehaviour
             Item auxItem = items.Count > i ? items[i] : null;
             SpawnSlot(auxItem);
         }
+        Instantiate(m_addSlotPrefab, transform);
     }
 
     void SpawnSlot(Item item)
@@ -45,7 +46,7 @@ public class InventoryPanelController : MonoBehaviour
                     image.gameObject.SetActive(true);
 
                     GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
-                    text.GetComponent<Text>().text = item.itemAmount.ToString();
+                    text.GetComponent<Text>().text = $"X{item.itemAmount.ToString()}";
                     text.SetActive(true);
                 }
                 else

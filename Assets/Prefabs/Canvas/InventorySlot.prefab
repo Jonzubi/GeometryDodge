@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 212478763725019465, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 212478763725019465, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 190
+      objectReference: {fileID: 0}
     - target: {fileID: 3519737272927511752, guid: d70116ae798908944ae2de2e72b7557c,
         type: 3}
       propertyPath: m_Name
@@ -50,12 +60,12 @@ PrefabInstance:
     - target: {fileID: 3519737272927511753, guid: d70116ae798908944ae2de2e72b7557c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3519737272927511753, guid: d70116ae798908944ae2de2e72b7557c,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 160
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3519737272927511753, guid: d70116ae798908944ae2de2e72b7557c,
         type: 3}
@@ -126,6 +136,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455708668493140466, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455708668493140466, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455708668493140466, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455708668493140466, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647088817184254106, guid: d70116ae798908944ae2de2e72b7557c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d70116ae798908944ae2de2e72b7557c, type: 3}
