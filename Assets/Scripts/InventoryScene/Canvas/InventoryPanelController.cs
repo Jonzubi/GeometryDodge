@@ -37,6 +37,11 @@ public class InventoryPanelController : MonoBehaviour
                 if (item != null)
                 {
                     image.sprite = itemSprites[(int)item.id]; // Cargar la imagen del item
+                    Vector2 nativeSpriteSize = image.sprite.rect.size;
+                    RectTransform auxRect = image.gameObject.GetComponent<RectTransform>();
+                    float relation = 175 / nativeSpriteSize.y; // 175 es la altura que quiero que tenga la imagen siempre
+                    Vector2 auxSizeDelta = auxRect.sizeDelta;
+                    auxRect.sizeDelta = new Vector2(nativeSpriteSize.x * relation, 175);
                     image.gameObject.SetActive(true);
 
                     GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
