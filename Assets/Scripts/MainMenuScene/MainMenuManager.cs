@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
 
     void UserDataToCanvas(UserData userData)
     {
-        txtLevel.GetComponent<Text>().text = $"Level: {userData.level}";
+        txtLevel.GetComponent<Text>().text = userData.level.ToString();
         txtCoins.GetComponent<Text>().text = $"{userData.totalCoins}";
     }
     public void PlayBtnClick()
