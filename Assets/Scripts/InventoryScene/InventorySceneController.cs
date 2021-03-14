@@ -13,4 +13,9 @@ public class InventorySceneController : MonoBehaviour
             SceneManager.LoadScene("MainMenuScene");
         }
     }
+
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
 }
