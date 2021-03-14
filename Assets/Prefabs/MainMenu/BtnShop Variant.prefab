@@ -37,7 +37,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4931685126553391592}
     - target: {fileID: 4962588670955662527, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 5858309568746546697, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 5858309568746546697, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 5858309568746546698, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
       propertyPath: m_Name
-      value: BtnShop
+      value: BtnShop Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5858309568751885202, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
@@ -212,3 +212,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d7ea4fc49b9f7f49878f49073499b2e, type: 3}
+--- !u!114 &4931685126553391592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5858309568746546696, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1530160636118579168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
