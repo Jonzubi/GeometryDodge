@@ -25,6 +25,11 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void ShopBtnClick()
+    {
+        SceneManager.LoadScene("ShopScene");
+    }
+
     public void InventoryBtnClick()
     {
         SceneManager.LoadScene("InventoryScene");

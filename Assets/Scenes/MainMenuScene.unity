@@ -148,6 +148,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4962588670955662527, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 364879005}
+    - target: {fileID: 4962588670955662527, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayBtnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 5858309568746546697, guid: 5d7ea4fc49b9f7f49878f49073499b2e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -434,6 +444,7 @@ MonoBehaviour:
   btnPlay: {fileID: 333425845}
   btnInventory: {fileID: 1782561364}
   btnShop: {fileID: 1072465853}
+  menuAnimationTime: 0.15
 --- !u!114 &364879006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1342,6 +1353,36 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 1072465852}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 364879005}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShopBtnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900437786834672479, guid: b5f406148bb385c45b3cc3c2a151aa7c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7379064082673859921, guid: b5f406148bb385c45b3cc3c2a151aa7c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1746,6 +1787,16 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 1782561363}
+    - target: {fileID: 6768581564981339379, guid: 132263d4dab2262438c488f3ee95e518,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 364879005}
+    - target: {fileID: 6768581564981339379, guid: 132263d4dab2262438c488f3ee95e518,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InventoryBtnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 7668493657824330493, guid: 132263d4dab2262438c488f3ee95e518,
         type: 3}
       propertyPath: m_AnchorMax.y
