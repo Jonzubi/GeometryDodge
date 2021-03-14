@@ -1,10 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class InventorySceneController : MonoBehaviour
 {
+    public GameObject txtCoins;
+
+    void Awake()
+    {
+        UserDataToCanvas(UserDataKeeper.userData);    
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,5 +23,15 @@ public class InventorySceneController : MonoBehaviour
     public void GoMainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    void UserDataToCanvas(UserData userData)
+    {
+        if (userData == null)
+        {
+            UserDataKeeper.LoadUserData();
+            userData = UserDataKeeper.userData;
+        }
+        txtCoins.GetComponent<Text>().text = $"{userData.totalCoins}";
     }
 }
