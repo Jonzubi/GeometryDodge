@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.IO;
+using TMPro;
+
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -16,8 +15,8 @@ public class MainMenuManager : MonoBehaviour
 
     void UserDataToCanvas(UserData userData)
     {
-        txtLevel.GetComponent<Text>().text = userData.level.ToString();
-        txtCoins.GetComponent<Text>().text = $"{userData.totalCoins}";
+        txtLevel.GetComponent<TextMeshProUGUI>().text = userData.level.ToString();
+        txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
     }
     public void PlayBtnClick()
     {
