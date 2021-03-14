@@ -440,11 +440,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtLevel: {fileID: 9221128533844065994}
+  txtXP: {fileID: 9221128534572352105}
+  sliderXP: {fileID: 9221128533406285289}
   txtCoins: {fileID: 540283122}
   btnPlay: {fileID: 333425845}
   btnInventory: {fileID: 1782561364}
   btnShop: {fileID: 1072465853}
   menuAnimationTime: 0.15
+  m_XpProgression: 25
 --- !u!114 &364879006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2021,7 +2024,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.354
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
