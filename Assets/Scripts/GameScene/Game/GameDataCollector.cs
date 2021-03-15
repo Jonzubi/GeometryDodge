@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameDataCollector : MonoBehaviour
 {
-    public static int m_enemyKilled = 0, m_coinsReceived = 0;
+    public static int expPerRound = 25;
+    public static int m_enemyKilled = 0, m_coinsReceived = 0, m_expReceived = 0;
     public static float m_timeSurvived = 0;
 
     public static void EnemyKilled()
@@ -27,5 +28,11 @@ public class GameDataCollector : MonoBehaviour
         m_enemyKilled = 0;
         m_coinsReceived = 0;
         m_timeSurvived = 0;
+        m_expReceived = 0;
+    }
+
+    public static void AddExp(int round)
+    {
+        m_expReceived += round * expPerRound;
     }
 }

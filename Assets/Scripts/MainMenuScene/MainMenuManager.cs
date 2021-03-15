@@ -135,7 +135,7 @@ public class MainMenuManager : MonoBehaviour
     float GetLevelFromXP()
     {
         int xp = UserDataKeeper.userData.totalXP;
-        return (Mathf.Floor(m_XpProgression + Mathf.Sqrt(Mathf.Pow(m_XpProgression, 2) - 4 * m_XpProgression * -xp))) / (2 * m_XpProgression);
+        return Mathf.Floor((m_XpProgression + Mathf.Sqrt(Mathf.Pow(m_XpProgression, 2) - 4 * m_XpProgression * -xp)) / (2 * m_XpProgression));
     }
 
     string GetXPString()
@@ -149,6 +149,6 @@ public class MainMenuManager : MonoBehaviour
     {
         float actualLevelMinXP = GetXPFromLevel(GetLevelFromXP());
         float nextLevelXP = GetXPFromLevel(GetLevelFromXP() + 1);
-        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP - actualLevelMinXP);
+        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP);
     }
 }

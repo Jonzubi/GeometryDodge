@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
         m_spawnManager.DestroyAllEnemies(true);
         m_spawnManager.SpawnCoins(round);
         m_spawnManager.SpawnPowerUps(round);
+        GameDataCollector.AddExp(round);
         m_canvasManager.SetTimeLeftInfoText($"LOOT!");
         round++;
         StartRound(15);
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
         m_canvasManager.SetGameOverTexts();
 
         UserDataKeeper.userData.totalCoins += GameDataCollector.m_coinsReceived;
+        UserDataKeeper.userData.totalXP += GameDataCollector.m_expReceived;
         UserDataKeeper.userData.CollectItems(collectedItems);
         UserDataKeeper.SaveUserData();
     }
