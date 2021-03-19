@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("UsingPowerUp"))
         {
-            StartCoroutine(m_destroyEnemy.Destroying());
+            m_destroyEnemy.InstantDestroy();
             Destroy(other.gameObject);
         }
     }
