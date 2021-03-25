@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_roundInfoText, m_secondsText, m_timeLeftInfo, m_gameDataPanel, m_xpText;
+    GameObject m_roundInfoText, m_secondsText, m_timeLeftInfo, m_gameDataPanel, m_xpText, m_sliderXP;
 
     void Awake()
     {
@@ -40,9 +42,30 @@ public class CanvasManager : MonoBehaviour
         SetText(m_secondsText, "");
         SetText(m_timeLeftInfo, "");
         SetText(m_xpText, $"+{GameDataCollector.m_expReceived} XP");
+
+        AnimateXPText();
+        StartCoroutine(AnimateXPSlider());
+    }
+    void AnimateXPText()
+    {
         m_xpText.transform.localScale = Vector3.zero;
         m_gameDataPanel.SetActive(true);
         LeanTween.scale(m_xpText, Vector3.one, 0.5f);
+    }
+
+    IEnumerator AnimateXPSlider()
+    {
+        int xp = UserDataKeeper.userData.totalXP;
+        m_sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(xp);
+
+        if (XPController.GetLevelFromXP(xp) < XPController.GetLevelFromXP(xp + GameDataCollector.m_expReceived))
+        {
+            // Subimos de nivel
+        }
+        else
+        {
+            // Seguimos en el mismo nivel
+        }
     }
 
     public void HideGameDataPanel()

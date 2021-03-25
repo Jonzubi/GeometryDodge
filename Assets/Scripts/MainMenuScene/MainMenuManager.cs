@@ -17,9 +17,10 @@ public class MainMenuManager : MonoBehaviour
 
     void UserDataToCanvas(UserData userData)
     {
-        txtLevel.GetComponent<TextMeshProUGUI>().text = XPController.GetLevelFromXP().ToString();
-        txtXP.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString();
-        sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue();
+        int xp = UserDataKeeper.userData.totalXP;
+        txtLevel.GetComponent<TextMeshProUGUI>().text = XPController.GetLevelFromXP(xp).ToString();
+        txtXP.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString(xp);
+        sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(xp);
         txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
     }
     public void PlayBtnClick()
