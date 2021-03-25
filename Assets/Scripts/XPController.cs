@@ -19,4 +19,10 @@ public class XPController
         float nextLvlXP = GetXPFromLevel(GetLevelFromXP() + 1);
         return $"{xp}/{nextLvlXP}";
     }
+    public static float GetXPSliderValue()
+    {
+        float actualLevelMinXP = GetXPFromLevel(GetLevelFromXP());
+        float nextLevelXP = GetXPFromLevel(GetLevelFromXP() + 1);
+        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP);
+    }
 }

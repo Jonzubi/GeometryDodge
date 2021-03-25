@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
     {
         txtLevel.GetComponent<TextMeshProUGUI>().text = XPController.GetLevelFromXP().ToString();
         txtXP.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString();
-        sliderXP.GetComponent<Slider>().value = GetXPSliderValue();
+        sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue();
         txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
     }
     public void PlayBtnClick()
@@ -124,14 +124,5 @@ public class MainMenuManager : MonoBehaviour
         else
             menuValue++;
         LoadMenuBtn(true);
-    }
-
-    
-
-    float GetXPSliderValue()
-    {
-        float actualLevelMinXP = XPController.GetXPFromLevel(XPController.GetLevelFromXP());
-        float nextLevelXP = XPController.GetXPFromLevel(XPController.GetLevelFromXP() + 1);
-        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP);
     }
 }
