@@ -9,7 +9,6 @@ public class MainMenuManager : MonoBehaviour
     public GameObject txtLevel, txtXP, sliderXP, txtCoins, btnPlay, btnInventory, btnShop;
     public float menuAnimationTime = 0.15f;
     int menuValue = 0; // 0: PlayBtn; 1: InventoryBtn; 2: ShopBtn
-    public int m_XpProgression = 25;
     void Awake()
     {
         UserDataKeeper.LoadUserData();
@@ -18,8 +17,8 @@ public class MainMenuManager : MonoBehaviour
 
     void UserDataToCanvas(UserData userData)
     {
-        txtLevel.GetComponent<TextMeshProUGUI>().text = GetLevelFromXP().ToString();
-        txtXP.GetComponent<TextMeshProUGUI>().text = GetXPString();
+        txtLevel.GetComponent<TextMeshProUGUI>().text = XPController.GetLevelFromXP().ToString();
+        txtXP.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString();
         sliderXP.GetComponent<Slider>().value = GetXPSliderValue();
         txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
     }
@@ -127,28 +126,12 @@ public class MainMenuManager : MonoBehaviour
         LoadMenuBtn(true);
     }
 
-    float GetXPFromLevel(float level)
-    {
-        return (m_XpProgression * Mathf.Pow(level, 2)) - (m_XpProgression * level);
-    }
-
-    float GetLevelFromXP()
-    {
-        int xp = UserDataKeeper.userData.totalXP;
-        return Mathf.Floor((m_XpProgression + Mathf.Sqrt(Mathf.Pow(m_XpProgression, 2) - 4 * m_XpProgression * -xp)) / (2 * m_XpProgression));
-    }
-
-    string GetXPString()
-    {
-        int xp = UserDataKeeper.userData.totalXP;
-        float nextLvlXP = GetXPFromLevel(GetLevelFromXP() + 1);
-        return $"{xp}/{nextLvlXP}";
-    }
+    
 
     float GetXPSliderValue()
     {
-        float actualLevelMinXP = GetXPFromLevel(GetLevelFromXP());
-        float nextLevelXP = GetXPFromLevel(GetLevelFromXP() + 1);
+        float actualLevelMinXP = XPController.GetXPFromLevel(XPController.GetLevelFromXP());
+        float nextLevelXP = XPController.GetXPFromLevel(XPController.GetLevelFromXP() + 1);
         return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP);
     }
 }
