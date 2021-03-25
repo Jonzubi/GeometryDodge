@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     CanvasManager m_canvasManager;
     SlotsController m_hudSlotsController;
     int enemiesLeft;
+    float startTimeLeft;
 
 
     void Awake()
@@ -64,8 +65,7 @@ public class GameManager : MonoBehaviour
         enemiesLeft--;
         if (enemiesLeft == 0)
         {
-            round++;
-            Invoke("StartRound", 2f);
+            startTimeLeft = 0;
         }
     }
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RoundTimeLeftCounter()
     {
-        float startTimeLeft = round * timeLeftSecsPerEnemy;
+        startTimeLeft = round * timeLeftSecsPerEnemy;
         for (;startTimeLeft > 0; startTimeLeft--)
         {
             m_canvasManager.SetTimeLeftInfoText($"Survive: {startTimeLeft} s");
