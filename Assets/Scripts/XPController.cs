@@ -21,6 +21,6 @@ public class XPController
     {
         float actualLevelMinXP = GetXPFromLevel(GetLevelFromXP(xp));
         float nextLevelXP = GetXPFromLevel(GetLevelFromXP(xp) + 1);
-        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, UserDataKeeper.userData.totalXP);
+        return Mathf.InverseLerp(actualLevelMinXP, nextLevelXP, xp);
     }
 }

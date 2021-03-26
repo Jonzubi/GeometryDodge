@@ -6,7 +6,7 @@ using TMPro;
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_roundInfoText, m_secondsText, m_timeLeftInfo, m_gameDataPanel, m_xpText, m_sliderXP;
+    GameObject m_roundInfoText, m_secondsText, m_timeLeftInfo, m_gameDataPanel, m_xpText, m_sliderXP, m_sliderXPText;
 
     void Awake()
     {
@@ -55,9 +55,10 @@ public class CanvasManager : MonoBehaviour
 
     IEnumerator AnimateXPSlider()
     {
+        if (GameDataCollector.m_expReceived == 0)
+            yield break;
+        float animationTime = 3f;
         int xp = UserDataKeeper.userData.totalXP;
-        m_sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(xp);
-
         if (XPController.GetLevelFromXP(xp) < XPController.GetLevelFromXP(xp + GameDataCollector.m_expReceived))
         {
             // Subimos de nivel
@@ -65,6 +66,12 @@ public class CanvasManager : MonoBehaviour
         else
         {
             // Seguimos en el mismo nivel
+            for (int i = xp; i <= xp + GameDataCollector.m_expReceived; i++)
+            {
+                m_sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(i);
+                m_sliderXPText.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString(i);
+                yield return new WaitForSeconds(animationTime / GameDataCollector.m_expReceived);
+            }
         }
     }
 

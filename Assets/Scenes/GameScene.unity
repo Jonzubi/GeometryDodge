@@ -3003,6 +3003,7 @@ MonoBehaviour:
   m_gameDataPanel: {fileID: 1170426362}
   m_xpText: {fileID: 1658475235}
   m_sliderXP: {fileID: 4471540295953558580}
+  m_sliderXPText: {fileID: 4471540296935084980}
 --- !u!1 &1658475235
 GameObject:
   m_ObjectHideFlags: 0
