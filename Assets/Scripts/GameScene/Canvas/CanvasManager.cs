@@ -62,6 +62,26 @@ public class CanvasManager : MonoBehaviour
         if (XPController.GetLevelFromXP(xp) < XPController.GetLevelFromXP(xp + GameDataCollector.m_expReceived))
         {
             // Subimos de nivel
+            int xpActual = xp;
+            int xpSum = GameDataCollector.m_expReceived;
+            while (XPController.GetLevelFromXP(xpActual) < XPController.GetLevelFromXP(xpActual + xpSum))
+            {
+                float nextLevelXP = XPController.GetXPFromLevel(XPController.GetLevelFromXP(xpActual) + 1);
+                int auxStartXP = xpActual;
+                for (; xpActual < nextLevelXP; xpActual++)
+                {
+                    m_sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(xpActual);
+                    m_sliderXPText.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString(xpActual);
+                    yield return new WaitForSeconds(animationTime / GameDataCollector.m_expReceived);
+                }
+                xpSum -= (int)(nextLevelXP - auxStartXP);
+            }
+            for (int i = xpActual; i <= xpActual + xpSum; i++)
+            {
+                m_sliderXP.GetComponent<Slider>().value = XPController.GetXPSliderValue(i);
+                m_sliderXPText.GetComponent<TextMeshProUGUI>().text = XPController.GetXPString(i);
+                yield return new WaitForSeconds(animationTime / GameDataCollector.m_expReceived);
+            }
         }
         else
         {
