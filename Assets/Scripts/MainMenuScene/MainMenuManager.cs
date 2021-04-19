@@ -25,7 +25,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayBtnClick()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("EquipScene");
     }
 
     public void ShopBtnClick()
