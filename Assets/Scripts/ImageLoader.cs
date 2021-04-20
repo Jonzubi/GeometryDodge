@@ -14,7 +14,7 @@ public class ImageLoader : MonoBehaviour
     }
 
     public static Sprite GetItem(int index)
-    {
+    {            
         return m_itemImages[index];
     }
 }
