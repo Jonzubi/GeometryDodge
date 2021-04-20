@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InventoryPanelController : MonoBehaviour
 {
     public GameObject m_slotPrefab, m_addSlotPrefab;
-    public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
+    // public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
     List<Item> items;
     int maxInventory;
     void Awake()
@@ -37,7 +37,7 @@ public class InventoryPanelController : MonoBehaviour
             {
                 if (item != null)
                 {
-                    image.sprite = itemSprites[(int)item.id]; // Cargar la imagen del item
+                    image.sprite = ImageLoader.GetItem((int)item.id); // Cargar la imagen del item
                     Vector2 nativeSpriteSize = image.sprite.rect.size;
                     RectTransform auxRect = image.gameObject.GetComponent<RectTransform>();
                     float relation = 175 / nativeSpriteSize.y; // 175 es la altura que quiero que tenga la imagen siempre

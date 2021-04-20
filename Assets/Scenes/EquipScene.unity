@@ -802,8 +802,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974854169}
   m_HandleRect: {fileID: 1974854168}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1638,6 +1638,7 @@ GameObject:
   - component: {fileID: 1198917519}
   - component: {fileID: 1198917523}
   - component: {fileID: 1198917524}
+  - component: {fileID: 1198917525}
   m_Layer: 5
   m_Name: EquipCanvas
   m_TagString: Untagged
@@ -1755,6 +1756,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d6f957d6a48754c83dd612a86add1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1198917525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198917518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adf05f28bc616d4e8da56fce4848c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1203402953
@@ -2254,8 +2267,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386243233}
   m_HandleRect: {fileID: 386243232}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
