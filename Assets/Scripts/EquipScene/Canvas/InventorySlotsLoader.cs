@@ -9,6 +9,9 @@ public class InventorySlotsLoader : MonoBehaviour
     int maxItemsInGame = 10;
     void Start()
     {
+        if (UserDataKeeper.userData == null)
+            UserDataKeeper.LoadUserData();
+        
         // Instanciamos los slots en el InventarioPrincipal
         for (int i = 0; i < UserDataKeeper.userData.maxInventory; i++)
         {
