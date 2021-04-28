@@ -2012,7 +2012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InventorySlots: {fileID: 2060314256}
   m_GameInventorySlots: {fileID: 2133446823}
-  m_SlotPrefab: {fileID: 8521694960328938762, guid: afcd7443af6e7954c8b1b8c9d90cea9a,
+  m_SlotPrefab: {fileID: 7770874387690519504, guid: f1ac332f2aaedee42b4422ece7430277,
     type: 3}
 --- !u!114 &1198917524
 MonoBehaviour:
