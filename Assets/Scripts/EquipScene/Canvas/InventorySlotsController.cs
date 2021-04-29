@@ -1,31 +1,72 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class InventorySlotsLoader : MonoBehaviour
+public class InventorySlotsController : MonoBehaviour
 {
     public GameObject m_InventorySlots, m_GameInventorySlots;
     public GameObject m_SlotPrefab;
 
+    List<Item> auxInventoryItems;
     int maxItemsInGame = 10;
+    List<Item> auxGameInventoryItems;
+    int m_selectedSlotIndex = -1;
     void Start()
     {
         if (UserDataKeeper.userData == null)
             UserDataKeeper.LoadUserData();
         
+        auxInventoryItems = UserDataKeeper.userData.items;
+        auxGameInventoryItems = new List<Item>(maxItemsInGame);
+        
+        RenderSlots();
+    }
+
+    void RenderSlots ()
+    {
+        DestroyAllChildren(m_InventorySlots);
+        DestroyAllChildren(m_GameInventorySlots);
+
         // Instanciamos los slots en el InventarioPrincipal
         for (int i = 0; i < UserDataKeeper.userData.maxInventory; i++)
         {
             GameObject slot = Instantiate(m_SlotPrefab, m_InventorySlots.transform);
-            Item auxItem = UserDataKeeper.userData.items.Count > i ? UserDataKeeper.userData.items[i] : null;
+            slot.GetComponent<InventorySlotClickListener>().SetSlotIndex(i);
+            Item auxItem = auxInventoryItems.Count > i ? auxInventoryItems[i] : null;
             LoadSlotImage(slot, auxItem);
+            HighLightSelectedSlot(slot, i);
         }
 
         // Instanciamos los slots en el Inventario del juego
-        for (int i = 0; i < maxItemsInGame; i++)
+        for (int i = 0; i < auxGameInventoryItems.Capacity; i++)
         {
             GameObject slot = Instantiate(m_SlotPrefab, m_GameInventorySlots.transform);
+            slot.GetComponent<InventorySlotClickListener>().SetSlotIndex(i);
             if (UserDataKeeper.userData.unlockedSlots > i)
-                LoadSlotImage(slot, null); // Meterá un vacio en la imagen del slot
+            {
+                Item auxItem = auxGameInventoryItems.Count > i ? auxGameInventoryItems[i] : null;
+                LoadSlotImage(slot, auxItem);
+                HighLightSelectedSlot(slot, i);
+            }
+        }
+    }
+
+    void DestroyAllChildren(GameObject gb)
+    {
+        foreach (Transform child in gb.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    void HighLightSelectedSlot(GameObject slot, int slotIndex)
+    {
+        if (m_selectedSlotIndex == -1)
+            return;
+        if (m_selectedSlotIndex == slotIndex)
+        {
+            // Es el slot seleccionado
+            slot.GetComponent<Image>().color = Color.yellow;
         }
     }
 
@@ -58,5 +99,15 @@ public class InventorySlotsLoader : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SlotSelected(int index)
+    {
+        if (m_selectedSlotIndex != index)
+        {
+            m_selectedSlotIndex = index;
+            RenderSlots();
+        }
+        
     }
 }
