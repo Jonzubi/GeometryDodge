@@ -107,7 +107,26 @@ public class InventorySlotsController : MonoBehaviour
         {
             m_selectedSlotIndex = index;
             RenderSlots();
-        }
-        
+        }        
+    }
+
+    public void SingleRight()
+    {
+        Debug.Log($"SingleRight {m_selectedSlotIndex}");
+    }
+
+    public void DoubleRight()
+    {
+        Debug.Log($"DoubleRight {m_selectedSlotIndex}");
+    }
+
+    public void SingleLeft()
+    {
+        Debug.Log($"SingleLeft {m_selectedSlotIndex}");
+    }
+
+    public void DoubleLeft()
+    {
+        Debug.Log($"DoubleLeft {m_selectedSlotIndex}");
     }
 }
