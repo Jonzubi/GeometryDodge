@@ -6,11 +6,15 @@ public class InventorySlotsController : MonoBehaviour
 {
     public GameObject m_InventorySlots, m_GameInventorySlots;
     public GameObject m_SlotPrefab;
+    public GameObject m_RightSingleArrow, m_RightDoubleArrow, m_LeftSingleArrow, m_LeftDoubleArrow;
 
-    List<Item> auxInventoryItems;
+    [HideInInspector]
+    public List<Item> auxInventoryItems; // Lo hago publico ya que necesito acceder desde InventorySlotClickListener
     int maxItemsInGame = 10;
     List<Item> auxGameInventoryItems;
     int m_selectedSlotIndex = -1;
+    [HideInInspector]
+    public string m_selectedSlotType = "";
     void Start()
     {
         if (UserDataKeeper.userData == null)
@@ -32,9 +36,10 @@ public class InventorySlotsController : MonoBehaviour
         {
             GameObject slot = Instantiate(m_SlotPrefab, m_InventorySlots.transform);
             slot.GetComponent<InventorySlotClickListener>().SetSlotIndex(i);
+            slot.GetComponent<InventorySlotClickListener>().SetSlotType("Inventory");
             Item auxItem = auxInventoryItems.Count > i ? auxInventoryItems[i] : null;
             LoadSlotImage(slot, auxItem);
-            HighLightSelectedSlot(slot, i);
+            HighLightSelectedSlot(slot, i, "Inventory");
         }
 
         // Instanciamos los slots en el Inventario del juego
@@ -42,13 +47,19 @@ public class InventorySlotsController : MonoBehaviour
         {
             GameObject slot = Instantiate(m_SlotPrefab, m_GameInventorySlots.transform);
             slot.GetComponent<InventorySlotClickListener>().SetSlotIndex(i);
+            slot.GetComponent<InventorySlotClickListener>().SetSlotType("Game");
             if (UserDataKeeper.userData.unlockedSlots > i)
             {
                 Item auxItem = auxGameInventoryItems.Count > i ? auxGameInventoryItems[i] : null;
                 LoadSlotImage(slot, auxItem);
-                HighLightSelectedSlot(slot, i);
+                HighLightSelectedSlot(slot, i, "Game");
             }
         }
+
+        CanButtonInteract(m_RightSingleArrow, m_selectedSlotType == "Inventory", false);
+        CanButtonInteract(m_RightDoubleArrow, m_selectedSlotType == "Inventory", true);
+        CanButtonInteract(m_LeftSingleArrow, m_selectedSlotType == "Game", false);
+        CanButtonInteract(m_LeftDoubleArrow, m_selectedSlotType == "Game", true);
     }
 
     void DestroyAllChildren(GameObject gb)
@@ -59,11 +70,11 @@ public class InventorySlotsController : MonoBehaviour
         }
     }
 
-    void HighLightSelectedSlot(GameObject slot, int slotIndex)
+    void HighLightSelectedSlot(GameObject slot, int slotIndex, string slotType)
     {
         if (m_selectedSlotIndex == -1)
             return;
-        if (m_selectedSlotIndex == slotIndex)
+        if (m_selectedSlotIndex == slotIndex && m_selectedSlotType == slotType)
         {
             // Es el slot seleccionado
             slot.GetComponent<Image>().color = Color.yellow;
@@ -128,5 +139,24 @@ public class InventorySlotsController : MonoBehaviour
     public void DoubleLeft()
     {
         Debug.Log($"DoubleLeft {m_selectedSlotIndex}");
+    }
+
+    void CanButtonInteract(GameObject button, bool canInteract, bool isDouble)
+    {    
+        Color auxColor = canInteract ? new Color(255, 255, 255, 255) : new Color(192, 192, 192, 100);    
+        if (!isDouble)
+        {
+            button.GetComponent<Button>().interactable = canInteract;
+            button.GetComponent<Image>().color = auxColor;
+        }
+        else
+        {
+            GameObject auxGb = button.transform.GetChild(0).gameObject;
+            button.GetComponent<Button>().interactable = canInteract;
+            auxGb.GetComponent<Image>().color = auxColor;
+            auxGb = button.transform.GetChild(1).gameObject;
+            button.GetComponent<Button>().interactable = canInteract;
+            auxGb.GetComponent<Image>().color = auxColor;
+        }
     }
 }

@@ -2209,6 +2209,12 @@ MonoBehaviour:
   m_GameInventorySlots: {fileID: 2133446823}
   m_SlotPrefab: {fileID: 7770874387690519504, guid: f1ac332f2aaedee42b4422ece7430277,
     type: 3}
+  m_RightSingleArrow: {fileID: 218831927}
+  m_RightDoubleArrow: {fileID: 1483413495}
+  m_LeftSingleArrow: {fileID: 543031362}
+  m_LeftDoubleArrow: {fileID: 619880629}
+  auxInventoryItems: []
+  m_selectedSlotType: 
 --- !u!114 &1198917524
 MonoBehaviour:
   m_ObjectHideFlags: 0
