@@ -25,8 +25,6 @@ public class InventorySlotClickListener : MonoBehaviour, IPointerClickHandler
     {
         if (m_slotType == "Inventory")
         {
-            Debug.Log(UserDataKeeper.userData.items.Count);
-            Debug.Log(m_siblingIndex);
             if (UserDataKeeper.userData.items.Count <= m_siblingIndex)
                 return;
         }
