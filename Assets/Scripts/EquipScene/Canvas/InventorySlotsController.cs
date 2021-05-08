@@ -143,7 +143,7 @@ public class InventorySlotsController : MonoBehaviour
 
     void CanButtonInteract(GameObject button, bool canInteract, bool isDouble)
     {    
-        Color auxColor = canInteract ? new Color(255, 255, 255, 255) : new Color(192, 192, 192, 100);    
+        Color32 auxColor = canInteract ? new Color32(255, 255, 255, 255) : new Color32(192, 192, 192, 100);    
         if (!isDouble)
         {
             button.GetComponent<Button>().interactable = canInteract;
