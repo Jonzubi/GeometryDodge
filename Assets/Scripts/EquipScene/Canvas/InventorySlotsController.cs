@@ -159,4 +159,25 @@ public class InventorySlotsController : MonoBehaviour
             auxGb.GetComponent<Image>().color = auxColor;
         }
     }
+
+    void MoveItem(int itemIndex, int amount, bool gameDirection)
+    {
+        // gameDirection será true si es desde el inventario al juego si no false
+        if (gameDirection)
+        {
+            foreach (var item in auxGameInventoryItems)
+            {
+                if (item.id == auxInventoryItems[itemIndex].id)
+                    item.itemAmount += amount;
+            }
+
+            if (auxInventoryItems[itemIndex].itemAmount - amount > 0)
+                auxInventoryItems[itemIndex].itemAmount -= amount; 
+            else
+                auxInventoryItems.RemoveAt(itemIndex);            
+            
+        } 
+        
+
+    }
 }
