@@ -123,7 +123,8 @@ public class InventorySlotsController : MonoBehaviour
 
     public void SingleRight()
     {
-        Debug.Log($"SingleRight {m_selectedSlotIndex}");
+        MoveItem(m_selectedSlotIndex, 1, true);
+        RenderSlots();
     }
 
     public void DoubleRight()
@@ -133,7 +134,8 @@ public class InventorySlotsController : MonoBehaviour
 
     public void SingleLeft()
     {
-        Debug.Log($"SingleLeft {m_selectedSlotIndex}");
+        MoveItem(m_selectedSlotIndex, 1, false);
+        RenderSlots();
     }
 
     public void DoubleLeft()
@@ -165,19 +167,43 @@ public class InventorySlotsController : MonoBehaviour
         // gameDirection será true si es desde el inventario al juego si no false
         if (gameDirection)
         {
+            bool found = false;
             foreach (var item in auxGameInventoryItems)
             {
                 if (item.id == auxInventoryItems[itemIndex].id)
+                {
                     item.itemAmount += amount;
+                    found = true;
+                }
             }
+
+            if (!found)
+                auxGameInventoryItems.Add(new Item(auxInventoryItems[itemIndex].id, amount));
 
             if (auxInventoryItems[itemIndex].itemAmount - amount > 0)
                 auxInventoryItems[itemIndex].itemAmount -= amount; 
             else
-                auxInventoryItems.RemoveAt(itemIndex);            
-            
-        } 
-        
+                auxInventoryItems.RemoveAt(itemIndex);
+        }
+        else
+        {
+            bool found = false;
+            foreach (var item in auxInventoryItems)
+            {
+                if (item.id == auxGameInventoryItems[itemIndex].id)
+                {
+                    item.itemAmount += amount;
+                    found = true;
+                }
+            }
 
+            if (!found)
+                auxInventoryItems.Add(new Item(auxGameInventoryItems[itemIndex].id, amount));
+
+            if (auxGameInventoryItems[itemIndex].itemAmount - amount > 0)
+                auxGameInventoryItems[itemIndex].itemAmount -= amount; 
+            else
+                auxGameInventoryItems.RemoveAt(itemIndex);
+        }
     }
 }
