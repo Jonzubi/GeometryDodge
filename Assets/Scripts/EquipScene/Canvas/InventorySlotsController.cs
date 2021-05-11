@@ -21,7 +21,7 @@ public class InventorySlotsController : MonoBehaviour
             UserDataKeeper.LoadUserData();
         
         auxInventoryItems = UserDataKeeper.userData.items;
-        auxGameInventoryItems = new List<Item>(maxItemsInGame);
+        auxGameInventoryItems = new List<Item>(UserDataKeeper.userData.unlockedSlots);
         
         RenderSlots();
     }
@@ -43,7 +43,7 @@ public class InventorySlotsController : MonoBehaviour
         }
 
         // Instanciamos los slots en el Inventario del juego
-        for (int i = 0; i < auxGameInventoryItems.Capacity; i++)
+        for (int i = 0; i < maxItemsInGame; i++)
         {
             GameObject slot = Instantiate(m_SlotPrefab, m_GameInventorySlots.transform);
             slot.GetComponent<InventorySlotClickListener>().SetSlotIndex(i);
@@ -56,10 +56,10 @@ public class InventorySlotsController : MonoBehaviour
             }
         }
 
-        CanButtonInteract(m_RightSingleArrow, m_selectedSlotType == "Inventory", false);
-        CanButtonInteract(m_RightDoubleArrow, m_selectedSlotType == "Inventory", true);
-        CanButtonInteract(m_LeftSingleArrow, m_selectedSlotType == "Game", false);
-        CanButtonInteract(m_LeftDoubleArrow, m_selectedSlotType == "Game", true);
+        CanButtonInteract(m_RightSingleArrow, m_selectedSlotType == "Inventory" && m_selectedSlotIndex != -1, false);
+        CanButtonInteract(m_RightDoubleArrow, m_selectedSlotType == "Inventory" && m_selectedSlotIndex != -1, true);
+        CanButtonInteract(m_LeftSingleArrow, m_selectedSlotType == "Game" && m_selectedSlotIndex != -1, false);
+        CanButtonInteract(m_LeftDoubleArrow, m_selectedSlotType == "Game" && m_selectedSlotIndex != -1, true);
     }
 
     void DestroyAllChildren(GameObject gb)
@@ -114,11 +114,8 @@ public class InventorySlotsController : MonoBehaviour
 
     public void SlotSelected(int index)
     {
-        if (m_selectedSlotIndex != index)
-        {
-            m_selectedSlotIndex = index;
-            RenderSlots();
-        }        
+        m_selectedSlotIndex = index;
+        RenderSlots();
     }
 
     public void SingleRight()
@@ -129,7 +126,9 @@ public class InventorySlotsController : MonoBehaviour
 
     public void DoubleRight()
     {
-        Debug.Log($"DoubleRight {m_selectedSlotIndex}");
+        int auxAmount = m_selectedSlotType == "Inventory" ? auxInventoryItems[m_selectedSlotIndex].itemAmount : auxGameInventoryItems[m_selectedSlotIndex].itemAmount;
+        MoveItem(m_selectedSlotIndex, auxAmount, true);
+        RenderSlots();
     }
 
     public void SingleLeft()
@@ -140,7 +139,9 @@ public class InventorySlotsController : MonoBehaviour
 
     public void DoubleLeft()
     {
-        Debug.Log($"DoubleLeft {m_selectedSlotIndex}");
+        int auxAmount = m_selectedSlotType == "Inventory" ? auxInventoryItems[m_selectedSlotIndex].itemAmount : auxGameInventoryItems[m_selectedSlotIndex].itemAmount;
+        MoveItem(m_selectedSlotIndex, auxAmount, false);
+        RenderSlots();
     }
 
     void CanButtonInteract(GameObject button, bool canInteract, bool isDouble)
@@ -177,13 +178,19 @@ public class InventorySlotsController : MonoBehaviour
                 }
             }
 
-            if (!found)
+            if (!found && auxGameInventoryItems.Capacity == auxGameInventoryItems.Count)
+                return;
+
+            if (!found && auxGameInventoryItems.Capacity > auxGameInventoryItems.Count)
                 auxGameInventoryItems.Add(new Item(auxInventoryItems[itemIndex].id, amount));
 
             if (auxInventoryItems[itemIndex].itemAmount - amount > 0)
                 auxInventoryItems[itemIndex].itemAmount -= amount; 
             else
+            {
+                m_selectedSlotIndex = -1;
                 auxInventoryItems.RemoveAt(itemIndex);
+            }
         }
         else
         {
@@ -203,7 +210,10 @@ public class InventorySlotsController : MonoBehaviour
             if (auxGameInventoryItems[itemIndex].itemAmount - amount > 0)
                 auxGameInventoryItems[itemIndex].itemAmount -= amount; 
             else
+            {
+                m_selectedSlotIndex = -1;
                 auxGameInventoryItems.RemoveAt(itemIndex);
+            }                
         }
     }
 }
