@@ -11,7 +11,8 @@ public class InventorySlotsController : MonoBehaviour
     [HideInInspector]
     public List<Item> auxInventoryItems; // Lo hago publico ya que necesito acceder desde InventorySlotClickListener
     int maxItemsInGame = 10;
-    List<Item> auxGameInventoryItems;
+    [HideInInspector]
+    public List<Item> auxGameInventoryItems; // Lo hago publico ya que SceneController asignara la lista a UserdataKeeper cuando se pulse el boton play
     int m_selectedSlotIndex = -1;
     [HideInInspector]
     public string m_selectedSlotType = "";

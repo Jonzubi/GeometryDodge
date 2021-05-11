@@ -10,7 +10,7 @@ public class InventoryController : MonoBehaviour
 
     void Awake()
     {
-        items = new List<Item>();
+        items = UserDataKeeper.gameInventory;
         m_spawnManager = FindObjectOfType<SpawnManager>();
         maxCapacity = UserDataKeeper.userData.unlockedSlots;
     }

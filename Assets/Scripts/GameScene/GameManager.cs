@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         round = 1;
         GameDataCollector.ResetData();
         m_spawnManager.InstantiatePlayer();
-        m_hudSlotsController.RenderSlots(new List<Item>());
+        m_hudSlotsController.RenderSlots(UserDataKeeper.gameInventory);
         StartRound(3);
     }
 

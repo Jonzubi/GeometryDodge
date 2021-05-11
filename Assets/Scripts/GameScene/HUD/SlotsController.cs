@@ -6,16 +6,12 @@ using UnityEngine.UI;
 public class SlotsController : MonoBehaviour
 {
     public GameObject[] slots;
-    public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
-
     PlayerController playerController;
     int unlockedSlots;
     
     void Awake()
     {
         unlockedSlots = UserDataKeeper.userData.unlockedSlots;
-
-        RenderSlots(new List<Item>()); // TODO: Por el momento inicializo con inventario vacio, en un futuro habrá que meter el inventario que se configure fuera de juego
     }
 
     public void RenderSlots(List<Item> items)
@@ -41,7 +37,7 @@ public class SlotsController : MonoBehaviour
                     }
                     else
                     {
-                        image.sprite = itemSprites[(int)items[i].id]; // Cargar la imagen del item
+                        image.sprite = ImageLoader.GetItem((int)items[i].id); // Cargar la imagen del item
                         image.gameObject.transform.parent.GetChild(1).gameObject.SetActive(false); // Desactivamos el texto del "Empty"
 
                         // Ajustar la imagen al tamaño de la caja
