@@ -25,7 +25,10 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayBtnClick()
     {
-        SceneManager.LoadScene("EquipScene");
+        if (UserDataKeeper.userData.items.Count > 0)
+            SceneManager.LoadScene("EquipScene");
+        else
+            SceneManager.LoadScene("GameScene");
     }
 
     public void ShopBtnClick()
