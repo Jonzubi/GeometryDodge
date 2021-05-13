@@ -113,6 +113,9 @@ public class SpawnManager : MonoBehaviour
         switch(itemName)
         {
             case ItemName.BULLET:
+                float nearestAngle = GetNearestEnemyAngle();
+                if (nearestAngle != float.MinValue)
+                    rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, GetNearestEnemyAngle());
                 Instantiate(m_bullet_usable, position, rotation);
                 break;
             case ItemName.SHIELD:
@@ -122,5 +125,31 @@ public class SpawnManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    float GetNearestEnemyAngle()
+    {
+        EnemyController[] enemies = FindObjectsOfType<EnemyController>(); // EnemyController son los circulos rojos normales
+        if (enemies == null)
+            return float.MinValue;
+        PlayerController player = FindObjectOfType<PlayerController>();
+
+        GameObject nearestEnemy = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (var enemy in enemies)
+        {
+            float distance = Vector2.Distance(enemy.transform.position, player.transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestEnemy = enemy.gameObject;
+                nearestDistance = distance;
+            }
+        }
+
+        Vector2 auxDirection = nearestEnemy.transform.position - player.transform.position;
+        float angle = Mathf.Atan2(auxDirection.y, auxDirection.x);
+        float angleInDegrees = angle * Mathf.Rad2Deg;
+        return -angleInDegrees;
     }
 }
