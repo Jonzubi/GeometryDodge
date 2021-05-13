@@ -31,7 +31,7 @@ public class InventorySlotClickListener : MonoBehaviour, IPointerClickHandler
         else
         {
             // El tipo sería game
-            if (m_InventorySlotsLoader.auxInventoryItems.Count <= m_siblingIndex)
+            if (m_InventorySlotsLoader.auxGameInventoryItems.Count <= m_siblingIndex)
                 return;
         }
         m_InventorySlotsLoader.m_selectedSlotType = m_slotType;
