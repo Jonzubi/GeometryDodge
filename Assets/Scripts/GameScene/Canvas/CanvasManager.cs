@@ -55,8 +55,6 @@ public class CanvasManager : MonoBehaviour
 
     IEnumerator AnimateXPSlider()
     {
-        if (GameDataCollector.m_expReceived == 0)
-            yield break;
         float animationTime = 3f;
         int xp = UserDataKeeper.userData.totalXP;
         if (XPController.GetLevelFromXP(xp) < XPController.GetLevelFromXP(xp + GameDataCollector.m_expReceived))
