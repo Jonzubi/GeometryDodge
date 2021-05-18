@@ -14,7 +14,9 @@ public class ImageLoader : MonoBehaviour
     }
 
     public static Sprite GetItem(int index)
-    {            
+    {
+        if (index > m_itemImages.Count - 1)
+            Debug.LogError("Este error ya paso, fijate si en la escena hay algun ImageLoader");         
         return m_itemImages[index];
     }
 }
