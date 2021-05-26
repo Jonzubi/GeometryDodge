@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InventorySceneController : MonoBehaviour
 {
@@ -22,6 +22,6 @@ public class InventorySceneController : MonoBehaviour
             UserDataKeeper.LoadUserData();
             userData = UserDataKeeper.userData;
         }
-        txtCoins.GetComponent<Text>().text = $"{userData.totalCoins}";
+        txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
     }
 }
