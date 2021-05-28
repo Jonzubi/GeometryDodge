@@ -60,6 +60,15 @@ public class Item
     }
 }
 
+[System.Serializable]
+public class ItemDescription
+{
+    public ItemName id;
+    public string description;
+    public int price;
+    public int unlockOnLevel;
+}
+
 public enum ItemName
 {
     BULLET,
