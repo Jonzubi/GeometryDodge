@@ -15,7 +15,6 @@ public class ShopItemsLoader : MonoBehaviour
         for (int i = 0; i < m_itemDescriptions.items.Length; i++)
         {
             GameObject shopItem = Instantiate(m_shopItemPrefab, m_scrollRectContent.transform);
-            Debug.Log(m_itemDescriptions.items[i].price.ToString());
             shopItem.GetComponent<ShopItemHandler>().Initialize(i, m_itemDescriptions.items[i]);
         }
     }
