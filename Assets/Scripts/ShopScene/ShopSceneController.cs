@@ -8,15 +8,16 @@ public class ShopSceneController : MonoBehaviour
 
     void Awake()
     {
-        UserDataToCanvas(UserDataKeeper.userData);    
+        UserDataToCanvas();    
     }
     public void GoMainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    void UserDataToCanvas(UserData userData)
+    public void UserDataToCanvas()
     {
+        UserData userData = UserDataKeeper.userData;
         if (userData == null)
         {
             UserDataKeeper.LoadUserData();
