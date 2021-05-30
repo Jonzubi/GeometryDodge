@@ -1,0 +1,15 @@
+{
+    "items": [{
+            "id": "BULLET",
+            "description": "Description for Bullet",
+            "price": 5,
+            "unlockOnLevel": 0
+        },
+        {
+            "id": "SHIELD",
+            "description": "Description for Shield",
+            "price": 10,
+            "unlockOnLevel": 2
+        }
+    ]
+}

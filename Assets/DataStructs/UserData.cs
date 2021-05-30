@@ -59,11 +59,15 @@ public class Item
         this.itemAmount = itemAmount;
     }
 }
-
+[System.Serializable]
+public class ItemDescriptions
+{
+    public ItemDescription[] items;
+}
 [System.Serializable]
 public class ItemDescription
 {
-    public ItemName id;
+    public string id;
     public string description;
     public int price;
     public int unlockOnLevel;
