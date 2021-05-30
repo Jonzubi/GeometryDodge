@@ -63,7 +63,7 @@ public class ShopItemHandler : MonoBehaviour
 
     public void BuyItem()
     {
-        if (buyingQuantity * m_itemDescription.price <= UserDataKeeper.userData.totalCoins)
+        if (buyingQuantity * m_itemDescription.price <= UserDataKeeper.userData.totalCoins && buyingQuantity > 0)
         {
             UserDataKeeper.userData.totalCoins -= buyingQuantity * m_itemDescription.price;
 
