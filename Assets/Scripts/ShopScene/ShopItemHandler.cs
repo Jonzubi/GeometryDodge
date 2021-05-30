@@ -6,6 +6,7 @@ public class ShopItemHandler : MonoBehaviour
 {
     TextMeshProUGUI m_title, m_cost, m_quantity;
     Image m_image;
+    ItemDescription m_itemDescription;
     int buyingQuantity = 0;
 
     void Awake()
@@ -17,6 +18,7 @@ public class ShopItemHandler : MonoBehaviour
     }
     public void Initialize(int itemIndex, ItemDescription itemDescription)
     {
+        m_itemDescription = itemDescription;
         m_title.text = itemDescription.id.ToString();
         m_cost.text = $"BUY {itemDescription.price * buyingQuantity}$";
         m_image.sprite = ImageLoader.GetItem(itemIndex);
@@ -28,5 +30,29 @@ public class ShopItemHandler : MonoBehaviour
         float relation = 64 / nativeSpriteSize.y; // 64 es la altura que quiero que tenga la imagen siempre
         Vector2 auxSizeDelta = auxRect.sizeDelta;
         auxRect.sizeDelta = new Vector2(nativeSpriteSize.x * relation, 64);
+    }
+
+    public void AddQuantity()
+    {
+        if (UserDataKeeper.userData.totalCoins > (buyingQuantity + 1) * m_itemDescription.price)
+        {
+            buyingQuantity++;
+            OnBuyingQuantityChanged();
+        }        
+    }
+
+    public void SubstractQuantity()
+    {
+        if (buyingQuantity > 0)
+        {
+            buyingQuantity--;
+            OnBuyingQuantityChanged();
+        }
+    }
+
+    public void OnBuyingQuantityChanged()
+    {
+        m_cost.text = $"BUY {m_itemDescription.price * buyingQuantity}$";
+        m_quantity.text = buyingQuantity.ToString();
     }
 }
