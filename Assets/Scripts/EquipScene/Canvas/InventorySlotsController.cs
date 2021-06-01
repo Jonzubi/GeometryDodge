@@ -21,7 +21,10 @@ public class InventorySlotsController : MonoBehaviour
         if (UserDataKeeper.userData == null)
             UserDataKeeper.LoadUserData();
         
-        auxInventoryItems = UserDataKeeper.userData.items;
+        foreach (var item in UserDataKeeper.userData.items)
+        {
+            auxInventoryItems.Add((Item)item.Clone());
+        }
         auxGameInventoryItems = new List<Item>(UserDataKeeper.userData.unlockedSlots);
         
         RenderSlots();

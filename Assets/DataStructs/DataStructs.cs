@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class UserData
@@ -48,7 +49,7 @@ public class UserData
 }
 
 [System.Serializable]
-public class Item
+public class Item : ICloneable
 {
     public ItemName id;
     public int itemAmount;
@@ -57,6 +58,11 @@ public class Item
     {
         this.id = id;
         this.itemAmount = itemAmount;
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }
 [System.Serializable]
