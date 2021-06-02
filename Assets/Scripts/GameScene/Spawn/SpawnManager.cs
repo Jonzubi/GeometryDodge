@@ -86,18 +86,32 @@ public class SpawnManager : MonoBehaviour
     {
         float powerUpsSpawnHigh = 10;
 
-        // Por ahora instanciaré un bullet al final de cada ronda, en el futuro cambiar esto por probabilidades
-        float randomX = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
-        Vector2 randomEndPos = GetRandomPos();
-        GameObject bullet = Instantiate(m_bullet_pickable, new Vector2(randomX, powerUpsSpawnHigh), m_bullet_pickable.transform.rotation);
-
-        //Tambien instaciare un shield como testeo
-        float randomX2 = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
-        Vector2 randomEndPos2 = GetRandomPos();
-        GameObject shield = Instantiate(m_shield_pickable, new Vector2(randomX2, powerUpsSpawnHigh), m_shield_pickable.transform.rotation);
-
-        LeanTween.move(bullet, randomEndPos, 1f).setEaseInOutBack();
-        LeanTween.move(shield, randomEndPos2, 1f).setEaseInOutBack();
+        foreach (var item in m_itemDescriptions.items)
+        {
+            if (round >= item.spawnAfterRound)
+            {
+                short spawnProbability = (short)Random.Range(0, 101);
+                if (spawnProbability <= item.spawnProbability)
+                {
+                    float randomX = Random.Range(m_GameManager.leftBoundX, m_GameManager.rightBoundX);
+                    Vector2 randomEndPos = GetRandomPos();
+                    GameObject gb;
+                    switch (item.id)
+                    {
+                        case "BULLET":
+                            gb = Instantiate(m_bullet_pickable, new Vector2(randomX, powerUpsSpawnHigh), m_bullet_pickable.transform.rotation);
+                            break;
+                        case "SHIELD":
+                            gb = Instantiate(m_shield_pickable, new Vector2(randomX, powerUpsSpawnHigh), m_bullet_pickable.transform.rotation);
+                            break;
+                        default:
+                            Debug.LogError("Define la id del Item bien");
+                            return;
+                    }
+                    LeanTween.move(gb, randomEndPos, 1f).setEaseInOutBack();
+                }
+            }
+        }
     }
 
     public void DestroyCoins(int timeLeft)

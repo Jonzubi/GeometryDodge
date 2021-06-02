@@ -4,7 +4,7 @@
             "description": "Description for Bullet",
             "price": 5,
             "unlockOnLevel": 0,
-            "spawnProbability": 20,
+            "spawnProbability": 75,
             "spawnAfterRound": 0
         },
         {
@@ -12,7 +12,7 @@
             "description": "Description for Shield",
             "price": 10,
             "unlockOnLevel": 2,
-            "spawnProbability": 15,
+            "spawnProbability": 50,
             "spawnAfterRound": 0
         }
     ]
