@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable, m_bullet_usable, m_shield_pickable, m_shield_usable;
     GameManager m_GameManager;
+    ItemDescriptions m_itemDescriptions;
     void Awake()
     {
         m_GameManager = FindObjectOfType<GameManager>();
+        var json = Resources.Load<TextAsset>("Items/ItemDescriptions");
+        m_itemDescriptions = JsonUtility.FromJson<ItemDescriptions>(json.text);
     }
 
     public void InstantiatePlayer()

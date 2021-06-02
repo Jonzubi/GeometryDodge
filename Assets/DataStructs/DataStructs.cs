@@ -73,10 +73,12 @@ public class ItemDescriptions
 [System.Serializable]
 public class ItemDescription
 {
-    public string id;
-    public string description;
-    public int price;
-    public int unlockOnLevel;
+    public string id; // ItemName, lo pongo en String ya que si no no se puede leer el JSON
+    public string description; // Descripcion del Item, aparecera al seleccionar en el inventario
+    public int price; // Precio del Item en el Shop
+    public int unlockOnLevel; // Nivel en el que se desbloquea el Item para comprarlo en el Shop
+    public short spawnProbability; // Probabilidad a la que se Spawnea en el juego
+    public short spawnAfterRound; // Indica a partir de que ronda se debe considerar spawnear el Item (0 si es desde el inicio)
 }
 
 public enum ItemName

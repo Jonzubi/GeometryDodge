@@ -3,13 +3,17 @@
             "id": "BULLET",
             "description": "Description for Bullet",
             "price": 5,
-            "unlockOnLevel": 0
+            "unlockOnLevel": 0,
+            "spawnProbability": 20,
+            "spawnAfterRound": 0
         },
         {
             "id": "SHIELD",
             "description": "Description for Shield",
             "price": 10,
-            "unlockOnLevel": 2
+            "unlockOnLevel": 2,
+            "spawnProbability": 15,
+            "spawnAfterRound": 0
         }
     ]
 }
