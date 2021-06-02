@@ -6,7 +6,7 @@ using TMPro;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject txtLevel, txtXP, sliderXP, txtCoins, btnPlay, btnInventory, btnShop;
+    public GameObject txtLevel, txtXP, sliderXP, txtCoins, btnPlay, btnInventory, btnShop, btnExit;
     public float menuAnimationTime = 0.15f;
     int menuValue = 0; // 0: PlayBtn; 1: InventoryBtn; 2: ShopBtn
     void Awake()
@@ -63,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
                 {
                     btnPlay.transform.position = new Vector3(2000, auxPosition.y, auxPosition.z);
                     LeanTween.moveLocalX(btnPlay, 0, menuAnimationTime);
-                    LeanTween.moveLocalX(btnShop, -2000, menuAnimationTime);
+                    LeanTween.moveLocalX(btnExit, -2000, menuAnimationTime);
                 }
                 else
                 {
@@ -103,19 +103,34 @@ public class MainMenuManager : MonoBehaviour
                 {
                     btnShop.transform.position = new Vector3(-2000, auxPosition.y, auxPosition.z);
                     LeanTween.moveLocalX(btnShop, 0, menuAnimationTime);
+                    LeanTween.moveLocalX(btnExit, 2000, menuAnimationTime);
+                }
+                break;
+            }
+            case 3:
+            {
+                Vector3 auxPosition = btnExit.transform.position;
+                if (positive)
+                {
+                    btnExit.transform.position = new Vector3(2000, auxPosition.y, auxPosition.z);
+                    LeanTween.moveLocalX(btnExit, 0, menuAnimationTime);
+                    LeanTween.moveLocalX(btnShop, -2000, menuAnimationTime);
+                }
+                else
+                {
+                    btnExit.transform.position = new Vector3(-2000, auxPosition.y, auxPosition.z);
+                    LeanTween.moveLocalX(btnExit, 0, menuAnimationTime);
                     LeanTween.moveLocalX(btnPlay, 2000, menuAnimationTime);
                 }
                 break;
             }
-            default:
-                break;
         }
     }
 
     public void LeftArrowMenu()
     {
         if (menuValue == 0)
-            menuValue = 2;
+            menuValue = 3;
         else
             menuValue--;
        LoadMenuBtn(false);
@@ -123,7 +138,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void RightArrowMenu()
     {
-        if (menuValue == 2)
+        if (menuValue == 3)
             menuValue = 0;
         else
             menuValue++;
