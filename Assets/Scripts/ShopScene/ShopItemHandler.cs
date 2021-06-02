@@ -53,6 +53,11 @@ public class ShopItemHandler : MonoBehaviour
             buyingQuantity--;
             OnBuyingQuantityChanged();
         }
+        else
+        {
+            buyingQuantity = UserDataKeeper.userData.totalCoins / m_itemDescription.price;
+            OnBuyingQuantityChanged();
+        }
     }
 
     public void OnBuyingQuantityChanged()
