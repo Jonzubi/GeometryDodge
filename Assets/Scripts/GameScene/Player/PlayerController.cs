@@ -27,24 +27,25 @@ public class PlayerController : MonoBehaviour
         float horizontal = m_playerJoystick.Horizontal;
         float vertical = m_playerJoystick.Vertical;
 
-        Vector2 moveTo = new Vector2(horizontal, vertical).normalized;
-        Vector2 isOutOfBounds = (Vector2)transform.position + (moveTo * m_playerMovement * Time.deltaTime);
+        Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
 
-        if (isOutOfBounds.x < m_GameManager.leftBoundX || isOutOfBounds.y < m_GameManager.bottomBoundY - 0.5f || isOutOfBounds.x > m_GameManager.rightBoundX || isOutOfBounds.y > m_GameManager.topBoundY)
-            return;
+        if (moveDirection == Vector2.zero)
+            moveDirection = lastMoveTo;
 
-        if (moveTo == Vector2.zero)
-            moveTo = lastMoveTo;
+        Vector2 goTo = moveDirection;
+        Vector2 isOutOfBounds = (Vector2)transform.position + (moveDirection * m_playerMovement * Time.deltaTime);
 
-        if (moveTo != Vector2.zero)
-        {
-            transform.Translate(moveTo * m_playerMovement * Time.deltaTime, Space.World);
-            float angle = Mathf.Atan2(moveTo.x, moveTo.y) * Mathf.Rad2Deg;
-            Vector3 auxAngles = transform.rotation.eulerAngles;
-            transform.eulerAngles = new Vector3(auxAngles.x, auxAngles.y, -angle);
-            lastMoveTo = moveTo;
-        }
-        
+        if (isOutOfBounds.x < m_GameManager.leftBoundX || isOutOfBounds.x > m_GameManager.rightBoundX )
+            goTo.x = 0;
+        if (isOutOfBounds.y < m_GameManager.bottomBoundY - 0.5f || isOutOfBounds.y > m_GameManager.topBoundY)
+            goTo.y = 0;
+
+
+        transform.Translate(goTo * m_playerMovement * Time.deltaTime, Space.World);
+        float angle = Mathf.Atan2(moveDirection.x, moveDirection.y) * Mathf.Rad2Deg;
+        Vector3 auxAngles = transform.rotation.eulerAngles;
+        transform.eulerAngles = new Vector3(auxAngles.x, auxAngles.y, -angle);
+        lastMoveTo = moveDirection;
     }
 
     // Esta funcion es llamada desde SlotsController, se produce cuando un Slot en el HUD es pulsado.
