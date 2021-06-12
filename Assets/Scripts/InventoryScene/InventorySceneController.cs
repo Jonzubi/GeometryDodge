@@ -8,20 +8,19 @@ public class InventorySceneController : MonoBehaviour
 
     void Awake()
     {
-        UserDataToCanvas(UserDataKeeper.userData);    
+        UserDataToCanvas();    
     }
     public void GoMainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    void UserDataToCanvas(UserData userData)
+    public void UserDataToCanvas()
     {
-        if (userData == null)
+        if (UserDataKeeper.userData == null)
         {
             UserDataKeeper.LoadUserData();
-            userData = UserDataKeeper.userData;
         }
-        txtCoins.GetComponent<TextMeshProUGUI>().text = $"{userData.totalCoins}";
+        txtCoins.GetComponent<TextMeshProUGUI>().text = $"{UserDataKeeper.userData.totalCoins}";
     }
 }

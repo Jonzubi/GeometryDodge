@@ -11,10 +11,23 @@ public class InventoryPanelController : MonoBehaviour
     int maxInventory;
     void Awake()
     {
+        RenderPanel();
+    }
+
+    public void RenderPanel()
+    {
         items = UserDataKeeper.userData.items;
         maxInventory = UserDataKeeper.userData.maxInventory;
-
+        DestroyAllChildren();
         SpawnSlots();
+    }
+
+    void DestroyAllChildren()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
     }
 
     void SpawnSlots()
