@@ -5,6 +5,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject m_circle, m_coin, m_player, m_implode, m_bullet_pickable, m_bullet_usable, m_shield_pickable, m_shield_usable;
     GameManager m_GameManager;
     ItemDescriptions m_itemDescriptions;
+    GameObject m_PlayerInstance;
     void Awake()
     {
         m_GameManager = FindObjectOfType<GameManager>();
@@ -15,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     public void InstantiatePlayer()
     {
         Vector3 randomPos = GetRandomPos();
-        Instantiate(m_player, randomPos, m_player.transform.rotation);
+        m_PlayerInstance = Instantiate(m_player, randomPos, m_player.transform.rotation);
     }
 
     void InstantiateEnemy()
@@ -125,20 +126,16 @@ public class SpawnManager : MonoBehaviour
 
     public void OnItemUsed(ItemName itemName, Vector3 position, Quaternion rotation)
     {
+
         switch(itemName)
         {
             case ItemName.BULLET:
-                float nearestAngle = GetNearestEnemyAngle();
-                if (nearestAngle != float.MinValue)
-                {
-                    rotation = new Quaternion();
-                    rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, GetNearestEnemyAngle());
-                }                    
-                Instantiate(m_bullet_usable, position, rotation);
+                float nearestAngle = GetNearestEnemyAngle();                
+                GameObject auxBullet = Instantiate(m_bullet_usable, m_PlayerInstance.transform.position, new Quaternion());
+                auxBullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, nearestAngle));
                 break;
             case ItemName.SHIELD:
-                GameObject player = FindObjectOfType<PlayerController>().gameObject;
-                Instantiate(m_shield_usable, player.transform);
+                Instantiate(m_shield_usable, m_PlayerInstance.transform);
                 break;
             default:
                 break;
@@ -150,14 +147,13 @@ public class SpawnManager : MonoBehaviour
         EnemyController[] enemies = FindObjectsOfType<EnemyController>(); // EnemyController son los circulos rojos normales
         if (enemies == null)
             return float.MinValue;
-        PlayerController player = FindObjectOfType<PlayerController>();
 
         GameObject nearestEnemy = null;
         float nearestDistance = float.MaxValue;
 
         foreach (var enemy in enemies)
         {
-            float distance = Vector2.Distance(enemy.transform.position, player.transform.position);
+            float distance = Vector2.Distance(enemy.transform.position, m_PlayerInstance.transform.position);
             if (distance < nearestDistance)
             {
                 nearestEnemy = enemy.gameObject;
@@ -168,9 +164,9 @@ public class SpawnManager : MonoBehaviour
         if (nearestEnemy == null)
             return float.MinValue;
         
-        Vector2 auxDirection = nearestEnemy.transform.position - player.transform.position;
+        Vector2 auxDirection = (nearestEnemy.transform.position - m_PlayerInstance.transform.position).normalized;
         float angle = Mathf.Atan2(auxDirection.y, auxDirection.x);
         float angleInDegrees = angle * Mathf.Rad2Deg;
-        return -angleInDegrees;
+        return angleInDegrees - 90;
     }
 }
