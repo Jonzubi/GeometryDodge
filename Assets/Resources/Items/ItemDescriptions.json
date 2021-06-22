@@ -11,7 +11,7 @@
             "id": "SHIELD",
             "description": "Description for Shield",
             "price": 10,
-            "unlockOnLevel": 2,
+            "unlockOnLevel": 5,
             "spawnProbability": 50,
             "spawnAfterRound": 0
         }

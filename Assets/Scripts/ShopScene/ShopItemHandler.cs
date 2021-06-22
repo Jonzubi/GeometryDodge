@@ -35,6 +35,15 @@ public class ShopItemHandler : MonoBehaviour
         float relation = 64 / nativeSpriteSize.y; // 64 es la altura que quiero que tenga la imagen siempre
         Vector2 auxSizeDelta = auxRect.sizeDelta;
         auxRect.sizeDelta = new Vector2(nativeSpriteSize.x * relation, 64);
+
+        bool unlocked = XPController.GetLevelFromXP(UserDataKeeper.userData.totalXP) >= itemDescription.unlockOnLevel;
+        // Con estas 2 lineas quiero desactivar el Text_Cost y activar el Locked del prefab si se debe mostrar bloqueado.
+        // Si he cambiado el orden de los hijos en un futuro, fallará
+        gameObject.transform.GetChild(1).gameObject.SetActive(unlocked);
+        GameObject auxLockedGB = gameObject.transform.GetChild(6).gameObject; // La pantalla negra que hace el efecto de bloqueado
+        auxLockedGB.SetActive(!unlocked);
+        if (!unlocked)
+            auxLockedGB.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"UNLOCK ON LVL {itemDescription.unlockOnLevel}";
     }
 
     public void AddQuantity()
