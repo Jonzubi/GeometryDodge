@@ -103,4 +103,9 @@ public class ShopItemHandler : MonoBehaviour
             UserDataKeeper.SaveUserData();
         }
     }
+
+    public void InfoItemSelected()
+    {
+        m_shopSceneController.InfoItemSelected(m_itemIndex);
+    }
 }

@@ -18,4 +18,9 @@ public class ShopItemsLoader : MonoBehaviour
             shopItem.GetComponent<ShopItemHandler>().Initialize(i, m_itemDescriptions.items[i]);
         }
     }
+
+    public ItemDescription GetItemDescriptionByIndex(int index)
+    {
+        return m_itemDescriptions.items[index];
+    }
 }
