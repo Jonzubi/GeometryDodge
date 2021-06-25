@@ -52,6 +52,11 @@ public class ShopItemHandler : MonoBehaviour
         {
             buyingQuantity++;
             OnBuyingQuantityChanged();
+        }
+        else
+        {
+            buyingQuantity = 0;
+            OnBuyingQuantityChanged();
         }        
     }
 
