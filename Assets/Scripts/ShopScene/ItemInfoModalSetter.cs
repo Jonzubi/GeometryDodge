@@ -6,7 +6,8 @@ using System;
 public class ItemInfoModalSetter : MonoBehaviour
 {
     Image image;
-    TextMeshProUGUI title, description;
+    TextMeshProUGUI title, description, quantity;
+    GameObject money; // solo en inventory
     public void Initialize()
     {
         GameObject popup = CommonFunctions.GetChildByName(gameObject, "Popup");
@@ -17,6 +18,13 @@ public class ItemInfoModalSetter : MonoBehaviour
             description = gbDescription.GetComponent<TextMeshProUGUI>();
         if (gbTitle != null)
             title = gbTitle.GetComponent<TextMeshProUGUI>();
+        // Solo en inventoryScene
+        GameObject quantityForm = CommonFunctions.GetChildByName(popup, "QuantityForm");
+        if (quantityForm != null)
+        {
+            quantity = CommonFunctions.GetChildByName(quantityForm, "Text_Quantity").GetComponent<TextMeshProUGUI>();
+            money = CommonFunctions.GetChildByName(quantityForm, "Text_Amount");
+        }
     }
 
     public void SetInfo(ItemDescription itemDescription)
@@ -32,5 +40,8 @@ public class ItemInfoModalSetter : MonoBehaviour
         float relation = 300 / nativeSpriteSize.y; // 300 es la altura que quiero que tenga la imagen siempre
         Vector2 auxSizeDelta = auxRect.sizeDelta;
         auxRect.sizeDelta = new Vector2(nativeSpriteSize.x * relation, 300);
+
+        quantity.text = "0";
+        money.SetActive(false);
     }
 }

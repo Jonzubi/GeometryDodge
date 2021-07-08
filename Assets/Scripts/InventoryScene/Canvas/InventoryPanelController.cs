@@ -11,6 +11,7 @@ public class InventoryPanelController : MonoBehaviour
     int maxInventory;
 
     ItemInfoModalSetter itemInfoModalSetter; // El modal que sale para vender el item
+    SellItemsController sellItemsController;
     ItemDescriptions m_itemDescriptions;
     void Awake()
     {
@@ -20,6 +21,8 @@ public class InventoryPanelController : MonoBehaviour
         RenderPanel();
         itemInfoModalSetter = transform.parent.GetComponentInChildren<ItemInfoModalSetter>(true);
         itemInfoModalSetter.Initialize();
+        sellItemsController = transform.parent.GetComponentInChildren<SellItemsController>(true);
+        sellItemsController.SetInfoModalSetter(itemInfoModalSetter);
     }
 
     public void RenderPanel()
@@ -98,5 +101,25 @@ public class InventoryPanelController : MonoBehaviour
         }
         itemInfoModalSetter.SetInfo(itemDescription);
         itemInfoModalSetter.gameObject.SetActive(true);
+
+        sellItemsController.SetSelectedItemIndex(index);
+    }
+
+    public Item GetItem(int index)
+    {
+        return items[index];
+    }
+
+    public ItemDescription GetItemDescription(int index)
+    {
+        ItemDescription itemDescription = null;
+        foreach (var item in m_itemDescriptions.items)
+        {
+            if (item.id == items[index].id.ToString())
+            {
+                itemDescription = item;
+            }                
+        }
+        return itemDescription;
     }
 }
