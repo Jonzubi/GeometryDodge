@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,7 +59,7 @@ public class InventoryPanelController : MonoBehaviour
                     image.gameObject.SetActive(true);
 
                     GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
-                    text.GetComponent<Text>().text = $"X{item.itemAmount.ToString()}";
+                    text.GetComponent<TextMeshProUGUI>().text = $"x{item.itemAmount.ToString()}";
                     text.SetActive(true);
                 }
                 else

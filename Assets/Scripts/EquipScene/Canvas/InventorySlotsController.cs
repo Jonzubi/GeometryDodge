@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class InventorySlotsController : MonoBehaviour
 {
@@ -103,7 +104,7 @@ public class InventorySlotsController : MonoBehaviour
                     image.gameObject.SetActive(true);
 
                     GameObject text = image.gameObject.transform.parent.GetChild(image.gameObject.transform.parent.childCount - 1).gameObject;
-                    text.GetComponent<Text>().text = $"X{item.itemAmount.ToString()}";
+                    text.GetComponent<TextMeshProUGUI>().text = $"x{item.itemAmount.ToString()}";
                     text.SetActive(true);
                 }
                 else
