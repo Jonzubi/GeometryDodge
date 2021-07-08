@@ -14,9 +14,9 @@ public class ItemInfoModalSetter : MonoBehaviour
         image = CommonFunctions.GetChildByName(popup, "Img_Item").GetComponent<Image>();
         GameObject gbDescription = CommonFunctions.GetChildByName(popup, "Text_Info");
         if (gbDescription != null)
-            description.GetComponent<TextMeshProUGUI>();
+            description = gbDescription.GetComponent<TextMeshProUGUI>();
         if (gbTitle != null)
-            title.GetComponent<TextMeshProUGUI>();
+            title = gbTitle.GetComponent<TextMeshProUGUI>();
     }
 
     public void SetInfo(ItemDescription itemDescription)
