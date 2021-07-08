@@ -9,9 +9,17 @@ public class InventoryPanelController : MonoBehaviour
     // public Sprite[] itemSprites; // Seran las imagenes de los items ordenados por id, es decir, sprites[0] = El item que tiene el id 0 -> (ItemName) 0 = BULLET
     List<Item> items;
     int maxInventory;
+
+    ItemInfoModalSetter itemInfoModalSetter; // El modal que sale para vender el item
+    ItemDescriptions m_itemDescriptions;
     void Awake()
     {
+        var json = Resources.Load<TextAsset>("Items/ItemDescriptions");
+        m_itemDescriptions = JsonUtility.FromJson<ItemDescriptions>(json.text);
+
         RenderPanel();
+        itemInfoModalSetter = transform.parent.GetComponentInChildren<ItemInfoModalSetter>(true);
+        itemInfoModalSetter.Initialize();
     }
 
     public void RenderPanel()
@@ -35,14 +43,15 @@ public class InventoryPanelController : MonoBehaviour
         for (int i = 0; i < maxInventory; i++)
         {
             Item auxItem = items.Count > i ? items[i] : null;
-            SpawnSlot(auxItem);
+            SpawnSlot(auxItem, i);
         }
         Instantiate(m_addSlotPrefab, transform);
     }
 
-    void SpawnSlot(Item item)
+    void SpawnSlot(Item item, int index)
     {
         GameObject slot = Instantiate(m_slotPrefab, this.transform);
+        slot.GetComponent<OpenInventoryItemInfo>().m_itemIndex = index;
         Image[] images = slot.GetComponentsInChildren<Image>(true);
         foreach (Image image in images)
         {
@@ -71,5 +80,24 @@ public class InventoryPanelController : MonoBehaviour
 
             }
         }
+    }
+
+    public void OpenItemInfo(int index)
+    {
+        ItemDescription itemDescription = null;
+        foreach (var item in m_itemDescriptions.items)
+        {
+            if (item.id == items[index].id.ToString())
+            {
+                itemDescription = item;
+            }                
+        }
+        if (itemDescription == null)
+        {
+            Debug.LogError("Algo anda mal");
+            return;
+        }
+        itemInfoModalSetter.SetInfo(itemDescription);
+        itemInfoModalSetter.gameObject.SetActive(true);
     }
 }
