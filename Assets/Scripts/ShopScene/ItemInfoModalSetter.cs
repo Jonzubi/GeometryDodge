@@ -10,15 +10,21 @@ public class ItemInfoModalSetter : MonoBehaviour
     public void Initialize()
     {
         GameObject popup = CommonFunctions.GetChildByName(gameObject, "Popup");
-        title = CommonFunctions.GetChildByName(popup, "Text_Title").GetComponent<TextMeshProUGUI>();
+        GameObject gbTitle = CommonFunctions.GetChildByName(popup, "Text_Title");
         image = CommonFunctions.GetChildByName(popup, "Img_Item").GetComponent<Image>();
-        description = CommonFunctions.GetChildByName(popup, "Text_Info").GetComponent<TextMeshProUGUI>();
+        GameObject gbDescription = CommonFunctions.GetChildByName(popup, "Text_Info");
+        if (gbDescription != null)
+            description.GetComponent<TextMeshProUGUI>();
+        if (gbTitle != null)
+            title.GetComponent<TextMeshProUGUI>();
     }
 
     public void SetInfo(ItemDescription itemDescription)
     {
-        title.SetText(itemDescription.id);
-        description.SetText(itemDescription.description);
+        if (title != null)
+            title.SetText(itemDescription.id);
+        if (description != null)
+            description.SetText(itemDescription.description);
         image.sprite = ImageLoader.GetItem((int)Enum.Parse(typeof(ItemName), itemDescription.id));
 
         Vector2 nativeSpriteSize = image.sprite.rect.size;
