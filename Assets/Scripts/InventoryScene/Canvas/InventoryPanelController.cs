@@ -10,6 +10,7 @@ public class InventoryPanelController : MonoBehaviour
     List<Item> items;
     int maxInventory;
 
+    InventorySceneController sceneController;
     ItemInfoModalSetter itemInfoModalSetter; // El modal que sale para vender el item
     SellItemsController sellItemsController;
     ItemDescriptions m_itemDescriptions;
@@ -19,6 +20,7 @@ public class InventoryPanelController : MonoBehaviour
         m_itemDescriptions = JsonUtility.FromJson<ItemDescriptions>(json.text);
 
         RenderPanel();
+        sceneController = FindObjectOfType<InventorySceneController>();
         itemInfoModalSetter = transform.parent.GetComponentInChildren<ItemInfoModalSetter>(true);
         itemInfoModalSetter.Initialize();
         sellItemsController = transform.parent.GetComponentInChildren<SellItemsController>(true);
@@ -121,5 +123,18 @@ public class InventoryPanelController : MonoBehaviour
             }                
         }
         return itemDescription;
+    }
+
+    public void SellItems(int itemIndex, int amount)
+    {
+        int auxPrice = GetItemDescription(itemIndex).price;
+        items[itemIndex].itemAmount -= amount;
+        if (items[itemIndex].itemAmount == 0)
+            items.RemoveAt(itemIndex);
+        UserDataKeeper.userData.items = items;
+        UserDataKeeper.userData.totalCoins += auxPrice * amount;
+        UserDataKeeper.SaveUserData();
+        sceneController.UserDataToCanvas();
+        RenderPanel();
     }
 }

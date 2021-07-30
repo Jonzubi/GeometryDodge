@@ -60,7 +60,8 @@ public class SellItemsController : MonoBehaviour
 
     public void SellItems()
     {
-
+        m_InventoryPanelController.SellItems(m_selectedItemIndex, sellingQuantity);
+        transform.parent.parent.gameObject.SetActive(false);
     }
 
     void OnSellingQuantityChanged()
