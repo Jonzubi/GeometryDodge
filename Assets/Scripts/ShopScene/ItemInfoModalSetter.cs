@@ -41,7 +41,9 @@ public class ItemInfoModalSetter : MonoBehaviour
         Vector2 auxSizeDelta = auxRect.sizeDelta;
         auxRect.sizeDelta = new Vector2(nativeSpriteSize.x * relation, 300);
 
-        quantity.text = "0";
-        money.SetActive(false);
+        if (quantity)
+            quantity.text = "0";
+        if (money)
+            money.SetActive(false);
     }
 }
